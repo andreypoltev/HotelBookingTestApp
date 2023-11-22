@@ -3,17 +3,17 @@ plugins {
     id("org.jetbrains.kotlin.android")
 
     id ("org.jetbrains.kotlin.plugin.serialization") version "1.8.21"
-    
+
 }
 
 android {
     namespace = "com.andreypoltev.hotelbookingtestapp"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.andreypoltev.hotelbookingtestapp"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -53,6 +53,17 @@ android {
 }
 
 dependencies {
+
+    val ktor_version = "2.3.6"
+
+    implementation("io.ktor:ktor-client-core:$ktor_version")
+    implementation("io.ktor:ktor-client-cio:$ktor_version")
+    implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
+
+
+
+
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 
 
