@@ -14,15 +14,15 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 
-class HotelViewModel : ViewModel() {
+class RoomViewModel : ViewModel() {
 
-    private val _flowOfHotelResponseModel = MutableStateFlow(HotelResponseModel())
-    val state = _flowOfHotelResponseModel.asStateFlow()
+    private val _flowOfRoomResponseModel = MutableStateFlow(RoomResponseModel())
+    val state = _flowOfRoomResponseModel.asStateFlow()
 
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            _flowOfHotelResponseModel.value = getResponse()
+            _flowOfRoomResponseModel.value = getResponse()
             getResponse()
 
         }
@@ -30,7 +30,7 @@ class HotelViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {}
     }
 
-    suspend fun getResponse(): HotelResponseModel {
+    suspend fun getResponse(): RoomResponseModel {
 
         val client = HttpClient(CIO) {
             install(ContentNegotiation) {
@@ -42,12 +42,15 @@ class HotelViewModel : ViewModel() {
             }
         }
 
-        val response = client.get(Links.HOTELS)
+        val response = client.get(Links.ROOMS)
         client.close()
 
         return response.body()
 
 
     }
+
+
+
 
 }

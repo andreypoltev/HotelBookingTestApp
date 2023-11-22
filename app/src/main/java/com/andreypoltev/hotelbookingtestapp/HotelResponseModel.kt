@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ResponseModel(
+data class HotelResponseModel(
     val id: Int? = null,
     val name: String? = null,
     val adress: String? = null,

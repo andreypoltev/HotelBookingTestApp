@@ -13,6 +13,7 @@ import com.andreypoltev.hotelbookingtestapp.ui.theme.HotelBookingTestAppTheme
 class MainActivity : ComponentActivity() {
 
     private val hotelViewModel by viewModels<HotelViewModel>()
+    private val roomViewModel by viewModels<RoomViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +24,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    HotelScreen(hotelViewModel)
+//                    HotelScreen(hotelViewModel)
+                    RoomScreen(roomViewModel)
 //                    Greeting("Android")
                 }
             }
