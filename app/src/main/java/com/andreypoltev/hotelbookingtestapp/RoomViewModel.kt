@@ -7,6 +7,7 @@ import io.ktor.client.call.body
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
+import io.ktor.serialization.kotlinx.json.KotlinxSerializationJsonExtensionProvider
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +17,7 @@ import kotlinx.serialization.json.Json
 
 class RoomViewModel : ViewModel() {
 
-    private val _flowOfRoomResponseModel = MutableStateFlow(RoomResponseModel())
+    private val _flowOfRoomResponseModel = MutableStateFlow(listOf<RoomResponseModel.Room>())
     val state = _flowOfRoomResponseModel.asStateFlow()
 
 
@@ -27,10 +28,10 @@ class RoomViewModel : ViewModel() {
 
         }
 
-        viewModelScope.launch(Dispatchers.IO) {}
+//        viewModelScope.launch(Dispatchers.IO) {}
     }
 
-    suspend fun getResponse(): RoomResponseModel {
+    suspend fun getResponse(): List<RoomResponseModel.Room> {
 
         val client = HttpClient(CIO) {
             install(ContentNegotiation) {
@@ -40,12 +41,18 @@ class RoomViewModel : ViewModel() {
                     }
                 )
             }
+
+//            install(JsonFeature)
+
         }
 
-        val response = client.get(Links.ROOMS)
+        val response: RoomResponseModel = client.get(Links.ROOMS).body()
         client.close()
 
-        return response.body()
+        if (response.rooms == null)
+            return emptyList()
+        else
+            return response.rooms
 
 
     }

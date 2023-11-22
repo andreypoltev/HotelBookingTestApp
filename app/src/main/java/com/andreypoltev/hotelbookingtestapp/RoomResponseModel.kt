@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class RoomResponseModel(
-    val rooms: List<Room?>? = null
+    val rooms: List<Room>? = null
 ) {
     @Serializable
     data class Room(
