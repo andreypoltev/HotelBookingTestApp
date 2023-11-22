@@ -1,4 +1,4 @@
-package com.andreypoltev.hotelbookingtestapp
+package com.andreypoltev.hotelbookingtestapp.screens.hotel
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

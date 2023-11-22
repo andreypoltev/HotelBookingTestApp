@@ -8,6 +8,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import com.andreypoltev.hotelbookingtestapp.screens.hotel.HotelViewModel
+import com.andreypoltev.hotelbookingtestapp.screens.room.RoomScreen
+import com.andreypoltev.hotelbookingtestapp.screens.room.RoomViewModel
 import com.andreypoltev.hotelbookingtestapp.ui.theme.HotelBookingTestAppTheme
 
 class MainActivity : ComponentActivity() {

@@ -1,7 +1,8 @@
-package com.andreypoltev.hotelbookingtestapp
+package com.andreypoltev.hotelbookingtestapp.screens.hotel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.andreypoltev.hotelbookingtestapp.Links
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.cio.CIO

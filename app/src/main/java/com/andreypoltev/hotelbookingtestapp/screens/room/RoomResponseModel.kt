@@ -1,4 +1,4 @@
-package com.andreypoltev.hotelbookingtestapp
+package com.andreypoltev.hotelbookingtestapp.screens.room
 
 
 import kotlinx.serialization.SerialName
