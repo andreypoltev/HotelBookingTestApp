@@ -24,6 +24,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
@@ -70,10 +72,19 @@ fun HotelScreen(viewModel: HotelViewModel) {
             CenterAlignedTopAppBar(title = { Text(text = "Отель") })
         },
         bottomBar = {
-            BottomAppBar {
-                Text(text = "zvada")
-                Button(onClick = { /*TODO*/ }) {
-                    Text(text = "To Do tuff")
+            BottomAppBar(containerColor = Color.White) {
+//                Text(text = "zvada")
+                Button(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 20.dp, vertical = 12.dp),
+                    onClick = { /*TODO*/ },
+                    shape = RoundedCornerShape(16.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color("#0D72FF".toColorInt())
+                    )
+                ) {
+                    Text(text = "К выбору номера", fontSize = 16.sp)
 
                 }
             }
@@ -97,7 +108,12 @@ fun HotelScreen(viewModel: HotelViewModel) {
                 colors = CardDefaults.cardColors(containerColor = Color.White)
             ) {
                 Column(
-                    modifier = Modifier.padding(16.dp),
+                    modifier = Modifier.padding(
+                        start = 16.dp,
+                        end = 16.dp,
+                        top = 0.dp,
+                        bottom = 16.dp
+                    ),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
 
@@ -235,7 +251,10 @@ fun HotelScreen(viewModel: HotelViewModel) {
                         modifier = Modifier.fillMaxWidth(),
                         colors = CardDefaults.cardColors(containerColor = Color("#FBFBFC".toColorInt()))
                     ) {
-                        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                        Column(
+                            Modifier.padding(16.dp),
+                            verticalArrangement = Arrangement.spacedBy(12.dp)
+                        ) {
 
                             Row(
                                 Modifier.fillMaxWidth(),
