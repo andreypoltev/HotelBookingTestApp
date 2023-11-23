@@ -54,6 +54,9 @@ android {
 
 dependencies {
 
+    implementation("io.coil-kt:coil-compose:2.5.0")
+
+
     val ktor_version = "2.3.6"
 
     implementation("io.ktor:ktor-client-core:$ktor_version")

@@ -35,6 +35,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.core.graphics.toColorInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -79,7 +80,8 @@ fun RoomScreen(viewModel: RoomViewModel) {
                 Card(
                     Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color.Transparent)
+//                    colors = CardDefaults.cardColors(containerColor = Color("#FFFFFF".toColorInt()))
+//                    colors = CardDefaults.cardColors(containerColor = Color.White)
                 ) {
                     Column(Modifier.padding(16.dp)) {
                         Text(text = it.name.toString(), style = MaterialTheme.typography.titleLarge)
@@ -88,7 +90,10 @@ fun RoomScreen(viewModel: RoomViewModel) {
                             it.peculiarities?.forEach {
                                 item {
                                     Card(shape = RoundedCornerShape(8.dp)) {
-                                        Text(text = it.toString(), Modifier.padding(12.dp))
+                                        Text(
+                                            text = it.toString(),
+                                            Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                                        )
 
                                     }
                                 }

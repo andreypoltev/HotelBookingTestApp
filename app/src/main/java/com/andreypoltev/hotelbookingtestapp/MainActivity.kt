@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import com.andreypoltev.hotelbookingtestapp.screens.hotel.HotelScreen
 import com.andreypoltev.hotelbookingtestapp.screens.hotel.HotelViewModel
 import com.andreypoltev.hotelbookingtestapp.screens.room.RoomScreen
 import com.andreypoltev.hotelbookingtestapp.screens.room.RoomViewModel
@@ -27,9 +28,11 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-//                    HotelScreen(hotelViewModel)
-                    RoomScreen(roomViewModel)
+//                    GeneratedCode()
+                    HotelScreen(hotelViewModel)
+//                    RoomScreen(roomViewModel)
 //                    Greeting("Android")
+
                 }
             }
         }
