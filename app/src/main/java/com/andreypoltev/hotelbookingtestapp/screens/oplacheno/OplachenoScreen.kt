@@ -35,18 +35,22 @@ import androidx.compose.ui.unit.sp
 import androidx.core.graphics.toColorInt
 import coil.compose.AsyncImage
 import com.andreypoltev.hotelbookingtestapp.screens.hotel.HotelViewModel
+import kotlin.random.Random
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OplachenoScreen(viewModel: HotelViewModel) {
 
+    val randomInt = Random.nextInt(from = 100000, until = Int.MAX_VALUE)
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(title = {
                 Text(
                     text = "Заказ оплачен",
-                    fontSize = 18.sp
+                    fontSize = 18.sp,
+                    color = Color("#000000".toColorInt())
                 )
             },
                 navigationIcon = {
@@ -67,14 +71,17 @@ fun OplachenoScreen(viewModel: HotelViewModel) {
                 Button(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(horizontal = 20.dp, vertical = 12.dp),
+                        .padding(horizontal = 20.dp, vertical = 8.dp),
                     onClick = { /*TODO*/ },
                     shape = RoundedCornerShape(16.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color("#0D72FF".toColorInt())
                     )
                 ) {
-                    Text(text = "Супер!", fontSize = 16.sp)
+                    Text(text = "Супер!", fontSize = 16.sp,
+                        color = Color("#FFFFFF".toColorInt())
+
+                        )
 
                 }
             }
@@ -121,12 +128,18 @@ fun OplachenoScreen(viewModel: HotelViewModel) {
             Spacer(modifier = Modifier.size(32.dp))
 
 
-            Text(text = "Ваш заказ принят в работу", fontSize = 22.sp)
+            Text(text = "Ваш заказ принят в работу",
+                fontSize = 22.sp,
+                color = Color("#000000".toColorInt())
+
+                )
             Spacer(modifier = Modifier.size(20.dp))
             Text(
-                text = "Подтверждение заказа №104893 может занять некоторое время (от 1 часа до суток). Как только мы получим ответ от туроператора, вам на почту придет уведомление.",
+                text = "Подтверждение заказа №$randomInt может занять некоторое время (от 1 часа до суток). Как только мы получим ответ от туроператора, вам на почту придет уведомление.",
                 fontSize = 16.sp,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                color = Color("#828796".toColorInt())
+
             )
 
         }
