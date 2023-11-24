@@ -28,7 +28,6 @@ class HotelViewModel : ViewModel() {
 
         }
 
-        viewModelScope.launch(Dispatchers.IO) {}
     }
 
     suspend fun getResponse(): HotelResponseModel {
@@ -43,7 +42,7 @@ class HotelViewModel : ViewModel() {
             }
         }
 
-        val response = client.get(Links.HOTELS)
+        val response = client.get(Links.HOTEL)
         client.close()
 
         return response.body()

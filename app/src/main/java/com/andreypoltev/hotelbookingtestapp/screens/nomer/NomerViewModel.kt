@@ -46,7 +46,7 @@ class NomerViewModel : ViewModel() {
 
         }
 
-        val response: NomerResponseModel = client.get(Links.ROOMS).body()
+        val response: NomerResponseModel = client.get(Links.NOMER).body()
         client.close()
 
         if (response.rooms == null)

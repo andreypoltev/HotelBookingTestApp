@@ -41,7 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.toColorInt
 import coil.compose.AsyncImage
-import com.andreypoltev.hotelbookingtestapp.composables.RatingNameAddress
+import com.andreypoltev.hotelbookingtestapp.composables.RatingNameAddressHotel
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
@@ -124,7 +124,7 @@ fun HotelScreen(viewModel: HotelViewModel) {
                         }
                     }
 
-                    RatingNameAddress(state)
+                    RatingNameAddressHotel(state)
 
 
                     Row(

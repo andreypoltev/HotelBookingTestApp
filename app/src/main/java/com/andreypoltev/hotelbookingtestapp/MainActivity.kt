@@ -11,7 +11,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.andreypoltev.hotelbookingtestapp.screens.bronirovaniye.BronirovaniyeScreen
-import com.andreypoltev.hotelbookingtestapp.screens.hotel.HotelScreen
+import com.andreypoltev.hotelbookingtestapp.screens.bronirovaniye.BronirovaniyeViewModel
 import com.andreypoltev.hotelbookingtestapp.screens.hotel.HotelViewModel
 import com.andreypoltev.hotelbookingtestapp.screens.nomer.NomerViewModel
 import com.andreypoltev.hotelbookingtestapp.ui.theme.HotelBookingTestAppTheme
@@ -20,6 +20,7 @@ class MainActivity : ComponentActivity() {
 
     private val hotelViewModel by viewModels<HotelViewModel>()
     private val nomerViewModel by viewModels<NomerViewModel>()
+    private val bronirovaniyeViewModel by viewModels<BronirovaniyeViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -43,7 +44,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    BronirovaniyeScreen()
+                    BronirovaniyeScreen(bronirovaniyeViewModel)
 //                    OplachenoScreen(viewModel = hotelViewModel)
 //                    GeneratedCode()
 //                    HotelScreen(hotelViewModel)
