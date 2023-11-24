@@ -1,11 +1,11 @@
-package com.andreypoltev.hotelbookingtestapp.screens.room
+package com.andreypoltev.hotelbookingtestapp.screens.nomer
 
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RoomResponseModel(
+data class NomerResponseModel(
     val rooms: List<Room>? = null
 ) {
     @Serializable

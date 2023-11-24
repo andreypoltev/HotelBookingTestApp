@@ -1,4 +1,4 @@
-package com.andreypoltev.hotelbookingtestapp.screens.room
+package com.andreypoltev.hotelbookingtestapp.screens.nomer
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,15 +15,15 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 
-class RoomViewModel : ViewModel() {
+class NomerViewModel : ViewModel() {
 
-    private val _flowOfRoomResponseModel = MutableStateFlow(listOf<RoomResponseModel.Room>())
-    val state = _flowOfRoomResponseModel.asStateFlow()
+    private val _flowOfNomerResponseModel = MutableStateFlow(listOf<NomerResponseModel.Room>())
+    val state = _flowOfNomerResponseModel.asStateFlow()
 
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            _flowOfRoomResponseModel.value = getResponse()
+            _flowOfNomerResponseModel.value = getResponse()
             getResponse()
 
         }
@@ -31,7 +31,7 @@ class RoomViewModel : ViewModel() {
 //        viewModelScope.launch(Dispatchers.IO) {}
     }
 
-    suspend fun getResponse(): List<RoomResponseModel.Room> {
+    suspend fun getResponse(): List<NomerResponseModel.Room> {
 
         val client = HttpClient(CIO) {
             install(ContentNegotiation) {
@@ -46,7 +46,7 @@ class RoomViewModel : ViewModel() {
 
         }
 
-        val response: RoomResponseModel = client.get(Links.ROOMS).body()
+        val response: NomerResponseModel = client.get(Links.ROOMS).body()
         client.close()
 
         if (response.rooms == null)

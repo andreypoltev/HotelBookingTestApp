@@ -2,24 +2,38 @@ package com.andreypoltev.hotelbookingtestapp
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.andreypoltev.hotelbookingtestapp.screens.hotel.HotelScreen
 import com.andreypoltev.hotelbookingtestapp.screens.hotel.HotelViewModel
-import com.andreypoltev.hotelbookingtestapp.screens.room.RoomScreen
-import com.andreypoltev.hotelbookingtestapp.screens.room.RoomViewModel
+import com.andreypoltev.hotelbookingtestapp.screens.oplacheno.OplachenoScreen
+import com.andreypoltev.hotelbookingtestapp.screens.nomer.NomerViewModel
 import com.andreypoltev.hotelbookingtestapp.ui.theme.HotelBookingTestAppTheme
 
 class MainActivity : ComponentActivity() {
 
     private val hotelViewModel by viewModels<HotelViewModel>()
-    private val roomViewModel by viewModels<RoomViewModel>()
+    private val nomerViewModel by viewModels<NomerViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.light(
+                android.graphics.Color.TRANSPARENT,
+                android.graphics.Color.TRANSPARENT
+            ),
+            navigationBarStyle = SystemBarStyle.light(
+                android.graphics.Color.TRANSPARENT,
+                android.graphics.Color.TRANSPARENT
+            )
+        )
+
         super.onCreate(savedInstanceState)
         setContent {
             HotelBookingTestAppTheme {
@@ -28,9 +42,11 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    OplachenoScreen(viewModel = hotelViewModel)
 //                    GeneratedCode()
-                    HotelScreen(hotelViewModel)
+//                    HotelScreen(hotelViewModel)
 //                    RoomScreen(roomViewModel)
+
 //                    Greeting("Android")
 
                 }
