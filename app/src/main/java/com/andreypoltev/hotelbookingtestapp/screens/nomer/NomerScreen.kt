@@ -25,6 +25,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -91,7 +92,10 @@ fun RoomScreen(viewModel: NomerViewModel) {
 
                         Button(onClick = { /*TODO*/ }, shape = RoundedCornerShape(8.dp)) {
 
-                            Text(text = "Подробнее о номере")
+                            Text(text = "Подробнее о номере",
+                                fontSize = 16.sp,
+
+                                )
 
                             Icon(
                                 imageVector = Icons.Default.KeyboardArrowRight,
