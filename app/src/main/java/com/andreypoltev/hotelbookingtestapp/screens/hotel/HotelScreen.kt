@@ -40,12 +40,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.toColorInt
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.andreypoltev.hotelbookingtestapp.Routes
 import com.andreypoltev.hotelbookingtestapp.composables.RatingNameAddressHotel
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
-fun HotelScreen(viewModel: HotelViewModel) {
+fun HotelScreen(viewModel: HotelViewModel, navController: NavHostController) {
 
     val state = viewModel.state.collectAsState()
     val pageCount: Int =
@@ -71,7 +73,7 @@ fun HotelScreen(viewModel: HotelViewModel) {
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(horizontal = 20.dp, vertical = 12.dp),
-                    onClick = { /*TODO*/ },
+                    onClick = { navController.navigate(Routes.nomerScreen) },
                     shape = RoundedCornerShape(16.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color("#0D72FF".toColorInt())

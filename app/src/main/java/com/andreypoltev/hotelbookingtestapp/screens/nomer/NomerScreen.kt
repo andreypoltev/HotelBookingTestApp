@@ -26,10 +26,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import com.andreypoltev.hotelbookingtestapp.Routes
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RoomScreen(viewModel: NomerViewModel) {
+fun NomerScreen(viewModel: NomerViewModel, navController: NavHostController) {
 
     val state = viewModel.state.collectAsState()
 
@@ -41,7 +43,7 @@ fun RoomScreen(viewModel: NomerViewModel) {
             )
         },
             navigationIcon = {
-                IconButton(onClick = { /*TODO*/ }) {
+                IconButton(onClick = { navController.popBackStack() }) {
                     Icon(
                         imageVector = Icons.Default.KeyboardArrowLeft,
                         contentDescription = "Go Back"
@@ -152,7 +154,7 @@ fun RoomScreen(viewModel: NomerViewModel) {
                         ) // 000 000 000
 
                         Button(
-                            onClick = { /*TODO*/ },
+                            onClick = { navController.navigate(Routes.bronirovaniyeScreen) },
                             Modifier.fillMaxWidth(),
                             shape = RoundedCornerShape(16.dp)
                         ) {
