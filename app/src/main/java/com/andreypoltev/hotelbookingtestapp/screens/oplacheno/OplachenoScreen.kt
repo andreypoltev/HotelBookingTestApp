@@ -8,27 +8,22 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.toColorInt
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.andreypoltev.hotelbookingtestapp.Routes
+import com.andreypoltev.hotelbookingtestapp.composables.CustomBottomBar
+import com.andreypoltev.hotelbookingtestapp.composables.CustomTopBar
 import com.andreypoltev.hotelbookingtestapp.screens.hotel.HotelViewModel
 import kotlin.random.Random
 
@@ -41,45 +36,10 @@ fun OplachenoScreen(viewModel: HotelViewModel, navController: NavHostController)
 
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(title = {
-                Text(
-                    text = "Заказ оплачен",
-                    fontSize = 18.sp,
-                    color = Color("#000000".toColorInt())
-                )
-            },
-                navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
-
-                        Icon(
-                            painter = painterResource(id = com.andreypoltev.hotelbookingtestapp.R.drawable.arrow_back),
-                            contentDescription = "Go Back", Modifier.size(32.dp)
-                        )
-
-
-                    }
-                })
+            CustomTopBar(text = "Заказ оплачен", navController = navController)
         },
         bottomBar = {
-            BottomAppBar(containerColor = Color.White) {
-//                Text(text = "zvada")
-                Button(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(horizontal = 20.dp, vertical = 8.dp),
-                    onClick = { /*TODO*/ },
-                    shape = RoundedCornerShape(16.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color("#0D72FF".toColorInt())
-                    )
-                ) {
-                    Text(text = "Супер!", fontSize = 16.sp,
-                        color = Color("#FFFFFF".toColorInt())
-
-                        )
-
-                }
-            }
+            CustomBottomBar(text = "Супер!", navController = navController, Routes.hotelScreen)
         }
     ) {
         Column(
@@ -123,11 +83,12 @@ fun OplachenoScreen(viewModel: HotelViewModel, navController: NavHostController)
             Spacer(modifier = Modifier.size(32.dp))
 
 
-            Text(text = "Ваш заказ принят в работу",
+            Text(
+                text = "Ваш заказ принят в работу",
                 fontSize = 22.sp,
                 color = Color("#000000".toColorInt())
 
-                )
+            )
             Spacer(modifier = Modifier.size(20.dp))
             Text(
                 text = "Подтверждение заказа №$randomInt может занять некоторое время (от 1 часа до суток). Как только мы получим ответ от туроператора, вам на почту придет уведомление.",

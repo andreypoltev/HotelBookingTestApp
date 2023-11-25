@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.andreypoltev.hotelbookingtestapp.Routes
+import com.andreypoltev.hotelbookingtestapp.composables.CustomTopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,28 +37,7 @@ fun NomerScreen(viewModel: NomerViewModel, navController: NavHostController) {
     val state = viewModel.state.collectAsState()
 
     Scaffold(topBar = {
-        CenterAlignedTopAppBar(title = {
-            Text(
-                text = "Hotel Name",
-//                modifier = Modifier.fillMaxSize()
-            )
-        },
-            navigationIcon = {
-                IconButton(onClick = { navController.popBackStack() }) {
-                    Icon(
-                        imageVector = Icons.Default.KeyboardArrowLeft,
-                        contentDescription = "Go Back"
-                    )
-
-                }
-            },
-            actions = {
-                IconButton(onClick = { /*TODO*/ }) {
-//                    Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Go Back")
-
-                }
-            }
-        )
+        CustomTopBar(text = "HotelName", navController = navController)
     }) {
         LazyColumn(
             modifier = Modifier.padding(

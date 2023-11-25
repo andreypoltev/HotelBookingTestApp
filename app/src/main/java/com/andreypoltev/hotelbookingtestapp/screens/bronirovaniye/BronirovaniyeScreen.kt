@@ -15,10 +15,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -31,13 +28,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.toColorInt
 import androidx.navigation.NavHostController
-import com.andreypoltev.hotelbookingtestapp.R
 import com.andreypoltev.hotelbookingtestapp.Routes
+import com.andreypoltev.hotelbookingtestapp.composables.CustomBottomBar
+import com.andreypoltev.hotelbookingtestapp.composables.CustomTopBar
 import com.andreypoltev.hotelbookingtestapp.composables.RatingNameAddressBronirovaniye
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -48,41 +45,14 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
 
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(title = {
-                Text(
-                    text = "Бронирование",
-                    fontSize = 18.sp,
-                    color = Color("#000000".toColorInt())
-                )
-            }, navigationIcon = {
-                IconButton(onClick = { navController.popBackStack() }) {
-
-                    Icon(
-                        painter = painterResource(id = R.drawable.arrow_back),
-                        contentDescription = "Go Back", Modifier.size(32.dp)
-                    )
-
-
-                }
-            })
+            CustomTopBar(text = "Бронирование", navController)
         },
         bottomBar = {
-            BottomAppBar(containerColor = Color.White) {
-//                Text(text = "zvada")
-                Button(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(horizontal = 20.dp, vertical = 12.dp),
-                    onClick = { navController.navigate(Routes.oplachenoScreen) },
-                    shape = RoundedCornerShape(16.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color("#0D72FF".toColorInt())
-                    )
-                ) {
-                    Text(text = "Оплатить", fontSize = 16.sp)
-
-                }
-            }
+            CustomBottomBar(
+                text = "Оплатить",
+                navController = navController,
+                navDestination = Routes.oplachenoScreen
+            )
         }
     ) {
         LazyColumn(
@@ -152,8 +122,10 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
 
             item {
                 Column(Modifier.padding(16.dp)) {
-                    Text(text = "Информация о покупателе", fontSize = 22.sp,
-                        color = Color.Black)
+                    Text(
+                        text = "Информация о покупателе", fontSize = 22.sp,
+                        color = Color.Black
+                    )
 
                     Spacer(modifier = Modifier.size(20.dp))
 
