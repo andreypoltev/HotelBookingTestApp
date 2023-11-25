@@ -2,8 +2,8 @@ package com.andreypoltev.hotelbookingtestapp.screens.bronirovaniye
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.andreypoltev.hotelbookingtestapp.Links
-import com.andreypoltev.hotelbookingtestapp.screens.hotel.HotelResponseModel
+import com.andreypoltev.hotelbookingtestapp.util.Links
+import com.andreypoltev.hotelbookingtestapp.Tourist
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.cio.CIO
@@ -18,15 +18,31 @@ import kotlinx.serialization.json.Json
 
 class BronirovaniyeViewModel : ViewModel() {
 
+    private val _tourists = MutableStateFlow<List<Tourist>>(emptyList())
+    val tourists = _tourists.asStateFlow()
+
+
     private val _flowOfHotelResponseModel = MutableStateFlow(BronirovaniyeResponseModel())
     val state = _flowOfHotelResponseModel.asStateFlow()
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
             _flowOfHotelResponseModel.value = getResponse()
+            addTourist()
 
 
         }
+    }
+
+    fun addTourist() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val currentList = _tourists.value
+            val updatedList = currentList + Tourist()
+            _tourists.value = updatedList
+
+        }
+
+
     }
 
     suspend fun getResponse(): BronirovaniyeResponseModel {

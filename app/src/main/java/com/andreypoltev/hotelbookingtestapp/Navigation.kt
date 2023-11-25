@@ -11,6 +11,7 @@ import com.andreypoltev.hotelbookingtestapp.screens.hotel.HotelViewModel
 import com.andreypoltev.hotelbookingtestapp.screens.nomer.NomerViewModel
 import com.andreypoltev.hotelbookingtestapp.screens.nomer.NomerScreen
 import com.andreypoltev.hotelbookingtestapp.screens.oplacheno.OplachenoScreen
+import com.andreypoltev.hotelbookingtestapp.util.Routes
 
 @Composable
 fun Navigation(
@@ -21,7 +22,7 @@ fun Navigation(
 
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Routes.hotelScreen) {
+    NavHost(navController = navController, startDestination = Routes.bronirovaniyeScreen) {
 
 
         composable(Routes.hotelScreen) {

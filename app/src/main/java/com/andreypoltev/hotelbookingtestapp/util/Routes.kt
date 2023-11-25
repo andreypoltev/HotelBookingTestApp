@@ -1,4 +1,4 @@
-package com.andreypoltev.hotelbookingtestapp
+package com.andreypoltev.hotelbookingtestapp.util
 
 object Routes {
 

@@ -4,15 +4,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -32,16 +29,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.toColorInt
 import androidx.navigation.NavHostController
-import com.andreypoltev.hotelbookingtestapp.Routes
+import com.andreypoltev.hotelbookingtestapp.util.Routes
 import com.andreypoltev.hotelbookingtestapp.composables.CustomBottomBar
 import com.andreypoltev.hotelbookingtestapp.composables.CustomTopBar
 import com.andreypoltev.hotelbookingtestapp.composables.RatingNameAddressBronirovaniye
+import com.andreypoltev.hotelbookingtestapp.composables.AddTouristButton
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHostController) {
 
     val state = viewModel.state.collectAsState()
+
+    val tourists = viewModel.tourists.collectAsState()
 
     Scaffold(
         topBar = {
@@ -66,7 +66,8 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
             item {
                 Card(
                     Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(containerColor = Color.White)
+                    colors = CardDefaults.cardColors(containerColor = Color.White),
+                    shape = RoundedCornerShape(16.dp)
                 ) {
                     Column(Modifier.padding(16.dp)) {
 
@@ -77,6 +78,7 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
                 }
             }
 
+            // Hotel info
             item {
                 Card(
                     Modifier.fillMaxWidth(),
@@ -119,72 +121,309 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
                 }
             }
 
-
+            // Информация о покупателе
             item {
-                Column(Modifier.padding(16.dp)) {
-                    Text(
-                        text = "Информация о покупателе", fontSize = 22.sp,
-                        color = Color.Black
-                    )
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(containerColor = Color.White),
+                    shape = RoundedCornerShape(16.dp)
+                ) {
+                    Column(Modifier.padding(16.dp)) {
+                        Text(
+                            text = "Информация о покупателе", fontSize = 22.sp,
+                            color = Color.Black
+                        )
 
-                    Spacer(modifier = Modifier.size(20.dp))
-
-
-                    var phoneNumber by remember { mutableStateOf("") }
-
-                    OutlinedTextField(
-                        modifier = Modifier.fillMaxWidth(),
-                        value = phoneNumber,
-                        onValueChange = { phoneNumber = it },
-                        label = { Text("Номер телефона") },
-                        singleLine = true,
-                        colors = TextFieldDefaults.outlinedTextFieldColors(
-                            containerColor = Color("#F6F6F9".toColorInt()),
-                            textColor = Color("#14142B".toColorInt()),
-                            focusedLabelColor = Color("#A9ABB7".toColorInt()),
-                            unfocusedLabelColor = Color("#A9ABB7".toColorInt()),
-                            focusedBorderColor = Color.Transparent,
-                            unfocusedBorderColor = Color.Transparent
-                        ),
-                        shape = RoundedCornerShape(12.dp)
+                        Spacer(modifier = Modifier.size(20.dp))
 
 
-                    )
+                        var phoneNumber by remember { mutableStateOf("") }
+
+                        OutlinedTextField(
+                            modifier = Modifier.fillMaxWidth(),
+                            value = phoneNumber,
+                            onValueChange = { phoneNumber = it },
+                            label = { Text("Номер телефона") },
+                            singleLine = true,
+                            colors = TextFieldDefaults.outlinedTextFieldColors(
+                                containerColor = Color("#F6F6F9".toColorInt()),
+                                textColor = Color("#14142B".toColorInt()),
+                                focusedLabelColor = Color("#A9ABB7".toColorInt()),
+                                unfocusedLabelColor = Color("#A9ABB7".toColorInt()),
+                                focusedBorderColor = Color.Transparent,
+                                unfocusedBorderColor = Color.Transparent
+                            ),
+                            shape = RoundedCornerShape(12.dp)
 
 
-                    Spacer(modifier = Modifier.size(8.dp))
+                        )
 
 
-                    var eMail by remember { mutableStateOf("") }
+                        Spacer(modifier = Modifier.size(8.dp))
 
-                    OutlinedTextField(
-                        modifier = Modifier.fillMaxWidth(),
-                        value = eMail,
-                        onValueChange = { eMail = it },
-                        label = { Text("Почта") },
-                        singleLine = true,
-                        colors = TextFieldDefaults.outlinedTextFieldColors(
-                            containerColor = Color("#F6F6F9".toColorInt()),
-                            textColor = Color("#14142B".toColorInt()),
-                            focusedLabelColor = Color("#A9ABB7".toColorInt()),
-                            unfocusedLabelColor = Color("#A9ABB7".toColorInt()),
-                            focusedBorderColor = Color.Transparent,
-                            unfocusedBorderColor = Color.Transparent,
-                        ),
-                        shape = RoundedCornerShape(12.dp)
-                    )
 
-                    Spacer(modifier = Modifier.size(8.dp))
+                        var eMail by remember { mutableStateOf("") }
 
-                    Text(
-                        fontSize = 14.sp,
-                        text = "Эти данные никому не передаются. После оплаты мы вышли чек на указанный вами номер и почту",
-                        color = Color("#828796".toColorInt())
-                    )
+                        OutlinedTextField(
+                            modifier = Modifier.fillMaxWidth(),
+                            value = eMail,
+                            onValueChange = { eMail = it },
+                            label = { Text("Почта") },
+                            singleLine = true,
+                            colors = TextFieldDefaults.outlinedTextFieldColors(
+                                containerColor = Color("#F6F6F9".toColorInt()),
+                                textColor = Color("#14142B".toColorInt()),
+                                focusedLabelColor = Color("#A9ABB7".toColorInt()),
+                                unfocusedLabelColor = Color("#A9ABB7".toColorInt()),
+                                focusedBorderColor = Color.Transparent,
+                                unfocusedBorderColor = Color.Transparent,
+                            ),
+                            shape = RoundedCornerShape(12.dp)
+                        )
+
+                        Spacer(modifier = Modifier.size(8.dp))
+
+                        Text(
+                            fontSize = 14.sp,
+                            text = "Эти данные никому не передаются. После оплаты мы вышли чек на указанный вами номер и почту",
+                            color = Color("#828796".toColorInt())
+                        )
+
+                    }
+                }
+            }
+
+            // Tourists
+
+            items(tourists.value) {
+
+                Card(
+                    Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(containerColor = Color.White),
+                    shape = RoundedCornerShape(16.dp)
+                ) {
+                    Column(Modifier.padding(16.dp)) {
+                        Row(Modifier.fillMaxWidth()) {
+                            Text(text = "Турист", fontSize = 22.sp)
+
+                            Spacer(modifier = Modifier.weight(1f))
+
+                            AddTouristButton(viewModel)
+
+
+                        }
+
+                        var name by remember { mutableStateOf(it.name) }
+
+
+                        OutlinedTextField(
+                            modifier = Modifier.fillMaxWidth(),
+                            value = name,
+                            onValueChange = { name = it },
+                            label = { Text("Имя") },
+                            singleLine = true,
+                            colors = TextFieldDefaults.outlinedTextFieldColors(
+                                containerColor = Color("#F6F6F9".toColorInt()),
+                                textColor = Color("#14142B".toColorInt()),
+                                focusedLabelColor = Color("#A9ABB7".toColorInt()),
+                                unfocusedLabelColor = Color("#A9ABB7".toColorInt()),
+                                focusedBorderColor = Color.Transparent,
+                                unfocusedBorderColor = Color.Transparent
+                            ),
+                            shape = RoundedCornerShape(12.dp)
+
+
+                        )
+
+                        var lastName by remember { mutableStateOf(it.lastName) }
+
+                        OutlinedTextField(
+                            modifier = Modifier.fillMaxWidth(),
+                            value = lastName,
+                            onValueChange = { lastName = it },
+                            label = { Text("Фамилия") },
+                            singleLine = true,
+                            colors = TextFieldDefaults.outlinedTextFieldColors(
+                                containerColor = Color("#F6F6F9".toColorInt()),
+                                textColor = Color("#14142B".toColorInt()),
+                                focusedLabelColor = Color("#A9ABB7".toColorInt()),
+                                unfocusedLabelColor = Color("#A9ABB7".toColorInt()),
+                                focusedBorderColor = Color.Transparent,
+                                unfocusedBorderColor = Color.Transparent
+                            ),
+                            shape = RoundedCornerShape(12.dp)
+
+
+                        )
+
+
+                        var dateOfBirth by remember { mutableStateOf(it.dateOfBirth.toString()) }
+
+                        OutlinedTextField(
+                            modifier = Modifier.fillMaxWidth(),
+                            value = dateOfBirth,
+                            onValueChange = { dateOfBirth = it },
+                            label = { Text("Дата рождения") },
+                            singleLine = true,
+                            colors = TextFieldDefaults.outlinedTextFieldColors(
+                                containerColor = Color("#F6F6F9".toColorInt()),
+                                textColor = Color("#14142B".toColorInt()),
+                                focusedLabelColor = Color("#A9ABB7".toColorInt()),
+                                unfocusedLabelColor = Color("#A9ABB7".toColorInt()),
+                                focusedBorderColor = Color.Transparent,
+                                unfocusedBorderColor = Color.Transparent
+                            ),
+                            shape = RoundedCornerShape(12.dp)
+
+                        )
+
+                        // foreignPassportNumber, foreignPassportExpirationDate
+
+                        var foreignPassportNumber by remember { mutableStateOf(it.foreignPassportNumber) }
+
+                        OutlinedTextField(
+                            modifier = Modifier.fillMaxWidth(),
+                            value = foreignPassportNumber,
+                            onValueChange = { foreignPassportNumber = it },
+                            label = { Text("Номер загранпаспорта") },
+                            singleLine = true,
+                            colors = TextFieldDefaults.outlinedTextFieldColors(
+                                containerColor = Color("#F6F6F9".toColorInt()),
+                                textColor = Color("#14142B".toColorInt()),
+                                focusedLabelColor = Color("#A9ABB7".toColorInt()),
+                                unfocusedLabelColor = Color("#A9ABB7".toColorInt()),
+                                focusedBorderColor = Color.Transparent,
+                                unfocusedBorderColor = Color.Transparent
+                            ),
+                            shape = RoundedCornerShape(12.dp)
+
+
+                        )
+
+                        var foreignPassportExpirationDate by remember { mutableStateOf(it.foreignPassportExpirationDate.toString()) }
+
+                        OutlinedTextField(
+                            modifier = Modifier.fillMaxWidth(),
+                            value = foreignPassportExpirationDate,
+                            onValueChange = { foreignPassportExpirationDate = it },
+                            label = { Text("Срок действия загранпаспорта") },
+                            singleLine = true,
+                            colors = TextFieldDefaults.outlinedTextFieldColors(
+                                containerColor = Color("#F6F6F9".toColorInt()),
+                                textColor = Color("#14142B".toColorInt()),
+                                focusedLabelColor = Color("#A9ABB7".toColorInt()),
+                                unfocusedLabelColor = Color("#A9ABB7".toColorInt()),
+                                focusedBorderColor = Color.Transparent,
+                                unfocusedBorderColor = Color.Transparent
+                            ),
+                            shape = RoundedCornerShape(12.dp)
+
+
+                        )
+
+                        var citizenship by remember { mutableStateOf(it.citizenship) }
+
+                        OutlinedTextField(
+                            modifier = Modifier.fillMaxWidth(),
+                            value = citizenship,
+                            onValueChange = { citizenship = it },
+                            label = { Text("Гражданство") },
+                            singleLine = true,
+                            colors = TextFieldDefaults.outlinedTextFieldColors(
+                                containerColor = Color("#F6F6F9".toColorInt()),
+                                textColor = Color("#14142B".toColorInt()),
+                                focusedLabelColor = Color("#A9ABB7".toColorInt()),
+                                unfocusedLabelColor = Color("#A9ABB7".toColorInt()),
+                                focusedBorderColor = Color.Transparent,
+                                unfocusedBorderColor = Color.Transparent
+                            ),
+                            shape = RoundedCornerShape(12.dp)
+
+
+                        )
+
+
+
+
+
+
+                    }
+
+
 
 
                 }
+
+
             }
+
+
+            // Add tourist
+            item {
+                Card(
+                    Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(containerColor = Color.White),
+                    shape = RoundedCornerShape(16.dp)
+                ) {
+                    Row(Modifier.padding(16.dp)) {
+                        Text(text = "Добавить туриста", fontSize = 22.sp)
+
+                        Spacer(modifier = Modifier.weight(1f))
+
+                        AddTouristButton(viewModel)
+
+
+                    }
+                }
+            }
+
+            // Total
+            item {
+                Card(
+                    Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(containerColor = Color.White),
+                    shape = RoundedCornerShape(16.dp)
+                ) {
+                    Column(Modifier.padding(16.dp), Arrangement.spacedBy(16.dp)) {
+                        Row {
+                            Text(text = "Тур", color = Color("#828796".toColorInt()))
+                            Spacer(modifier = Modifier.weight(1f))
+                            Text(text = state.value.tourPrice.toString())
+
+                        }
+
+                        Row {
+                            Text(text = "Топливный сбор", color = Color("#828796".toColorInt()))
+                            Spacer(modifier = Modifier.weight(1f))
+                            Text(text = state.value.fuelCharge.toString())
+
+                        }
+
+                        Row {
+                            Text(text = "Сервисный сбор", color = Color("#828796".toColorInt()))
+                            Spacer(modifier = Modifier.weight(1f))
+                            Text(text = state.value.serviceCharge.toString())
+
+                        }
+
+                        Row {
+                            Text(text = "К оплате", color = Color("#828796".toColorInt()))
+                            Spacer(modifier = Modifier.weight(1f))
+                            Text(
+                                text = (
+                                        (state.value.tourPrice?.toInt()
+                                            ?: 0) + (state.value.fuelCharge?.toInt()
+                                            ?: 0) + (state.value.serviceCharge?.toInt()
+                                            ?: 0)).toString()
+                            )
+
+                        }
+
+
+                    }
+                }
+            }
+
 
         }
     }
