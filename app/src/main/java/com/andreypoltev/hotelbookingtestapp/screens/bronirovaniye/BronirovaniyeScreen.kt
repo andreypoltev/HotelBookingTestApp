@@ -1,6 +1,5 @@
 package com.andreypoltev.hotelbookingtestapp.screens.bronirovaniye
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,22 +11,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,11 +32,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.toColorInt
 import androidx.navigation.NavHostController
-import com.andreypoltev.hotelbookingtestapp.composables.AddTouristButton
 import com.andreypoltev.hotelbookingtestapp.composables.CustomBottomBar
 import com.andreypoltev.hotelbookingtestapp.composables.CustomCard
 import com.andreypoltev.hotelbookingtestapp.composables.CustomColumn
-import com.andreypoltev.hotelbookingtestapp.composables.CustomOutlinedTextField
 import com.andreypoltev.hotelbookingtestapp.composables.CustomTextField
 import com.andreypoltev.hotelbookingtestapp.composables.CustomTopBar
 import com.andreypoltev.hotelbookingtestapp.composables.RatingNameAddress
@@ -168,6 +162,10 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
                 CustomCard {
                     CustomColumn {
 
+                        var isExpanded by remember {
+                            mutableStateOf(false)
+                        }
+
                         Row(
                             Modifier.fillMaxWidth(),
                             verticalAlignment = Alignment.CenterVertically
@@ -177,38 +175,74 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
                             Spacer(modifier = Modifier.weight(1f))
 
 
+                            Card(
+                                onClick = { isExpanded = !isExpanded },
+                                shape = RoundedCornerShape(8.dp),
+                                modifier = Modifier.size(32.dp),
+                                colors = CardDefaults.cardColors(
+                                    containerColor = Color("#0D72FF".toColorInt()).copy(
+                                        0.1f
+                                    )
+                                )
+                            ) {
+                                Box(
+                                    modifier = Modifier.fillMaxSize(),
+                                    contentAlignment = Alignment.Center
+                                ) {
+
+
+                                    val id: Int = if (isExpanded)
+                                        com.andreypoltev.hotelbookingtestapp.R.drawable.button_expand
+                                    else
+                                        com.andreypoltev.hotelbookingtestapp.R.drawable.button_hide
+
+
+                                    Icon(
+                                        painter = painterResource(id = id),
+                                        contentDescription = "Add tourist button",
+                                        modifier = Modifier.size(24.dp),
+                                        tint = Color("#0D72FF".toColorInt())
+                                    )
+                                }
+
+
+                            }
+
+
 //                            AddTouristButton(viewModel)
 
 
                         }
 
+                        if (isExpanded) {
 
-                        val name = remember { mutableStateOf(it.name) }
-                        CustomTextField(test = name, title = "Имя")
 
-                        val lastName = remember { mutableStateOf(it.lastName) }
-                        CustomTextField(test = lastName, title = "Фамилия")
+                            val name = remember { mutableStateOf(it.name) }
+                            CustomTextField(test = name, title = "Имя")
 
-                        val dateOfBirth = remember { mutableStateOf(it.dateOfBirth.toString()) }
-                        CustomTextField(test = dateOfBirth, title = "Дата рождения")
+                            val lastName = remember { mutableStateOf(it.lastName) }
+                            CustomTextField(test = lastName, title = "Фамилия")
 
-                        val citizenship = remember { mutableStateOf(it.citizenship) }
-                        CustomTextField(test = citizenship, title = "Номер телефона")
+                            val dateOfBirth = remember { mutableStateOf(it.dateOfBirth.toString()) }
+                            CustomTextField(test = dateOfBirth, title = "Дата рождения")
 
-                        val foreignPassportNumber =
-                            remember { mutableStateOf(it.foreignPassportNumber) }
-                        CustomTextField(
-                            test = foreignPassportNumber,
-                            title = "Номер загранпаспорта"
-                        )
+                            val citizenship = remember { mutableStateOf(it.citizenship) }
+                            CustomTextField(test = citizenship, title = "Номер телефона")
 
-                        val foreignPassportExpirationDate =
-                            remember { mutableStateOf(it.foreignPassportExpirationDate.toString()) }
-                        CustomTextField(
-                            test = foreignPassportExpirationDate,
-                            title = "Срок действия загранпаспорта"
-                        )
+                            val foreignPassportNumber =
+                                remember { mutableStateOf(it.foreignPassportNumber) }
+                            CustomTextField(
+                                test = foreignPassportNumber,
+                                title = "Номер загранпаспорта"
+                            )
 
+                            val foreignPassportExpirationDate =
+                                remember { mutableStateOf(it.foreignPassportExpirationDate.toString()) }
+                            CustomTextField(
+                                test = foreignPassportExpirationDate,
+                                title = "Срок действия загранпаспорта"
+                            )
+                        }
 
                     }
 
@@ -243,12 +277,6 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
                                     modifier = Modifier.size(24.dp),
                                     tint = Color.White
                                 )
-//                                Icon(
-//                                    modifier = Modifier.size(24.dp),
-//                                    imageVector = ,
-//                                    contentDescription = null, // Change as needed
-//                                    tint = Color.White
-//                                )
                             }
 
 
@@ -265,25 +293,42 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
             // Total
             item {
                 CustomCard {
-                    Column(Modifier.padding(16.dp), Arrangement.spacedBy(16.dp)) {
+                    CustomColumn {
                         Row {
                             Text(text = "Тур", color = Color("#828796".toColorInt()))
                             Spacer(modifier = Modifier.weight(1f))
-                            Text(text = state.value.tourPrice.toString())
+                            Text(
+                                text = state.value.tourPrice.toString().reversed().chunked(3)
+                                    .joinToString(" ").reversed() + " ₽",
+                                color = Color.Black,
+                                fontSize = 16.sp
+                            )
 
                         }
 
                         Row {
                             Text(text = "Топливный сбор", color = Color("#828796".toColorInt()))
                             Spacer(modifier = Modifier.weight(1f))
-                            Text(text = state.value.fuelCharge.toString())
+                            Text(
+                                text = state.value.fuelCharge.toString().reversed().chunked(3)
+                                    .joinToString(" ").reversed() + " ₽",
+                                color = Color.Black,
+                                fontSize = 16.sp
+
+                            )
 
                         }
 
                         Row {
                             Text(text = "Сервисный сбор", color = Color("#828796".toColorInt()))
                             Spacer(modifier = Modifier.weight(1f))
-                            Text(text = state.value.serviceCharge.toString())
+                            Text(
+                                text = state.value.serviceCharge.toString().reversed().chunked(3)
+                                    .joinToString(" ").reversed() + " ₽",
+                                color = Color.Black,
+                                fontSize = 16.sp
+
+                            )
 
                         }
 
@@ -295,7 +340,11 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
                                         (state.value.tourPrice
                                             ?: 0) + (state.value.fuelCharge
                                             ?: 0) + (state.value.serviceCharge
-                                            ?: 0)).toString()
+                                            ?: 0)).toString().reversed().chunked(3)
+                                    .joinToString(" ").reversed() + " ₽",
+                                color = Color.Black,
+                                fontSize = 16.sp
+
                             )
 
                         }
