@@ -9,18 +9,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -31,8 +26,9 @@ import com.andreypoltev.hotelbookingtestapp.composables.AddTouristButton
 import com.andreypoltev.hotelbookingtestapp.composables.CustomBottomBar
 import com.andreypoltev.hotelbookingtestapp.composables.CustomCard
 import com.andreypoltev.hotelbookingtestapp.composables.CustomColumn
+import com.andreypoltev.hotelbookingtestapp.composables.CustomOutlinedTextField
 import com.andreypoltev.hotelbookingtestapp.composables.CustomTopBar
-import com.andreypoltev.hotelbookingtestapp.composables.RatingNameAddressBronirovaniye
+import com.andreypoltev.hotelbookingtestapp.composables.RatingNameAddress
 import com.andreypoltev.hotelbookingtestapp.util.Routes
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -62,12 +58,17 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
             ), verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
 
-
             item {
                 CustomCard {
                     CustomColumn {
+                        RatingNameAddress(
+                            name = state.value.hotelName.toString(),
+                            address = state.value.hotelAdress.toString(),
+                            rating = state.value.horating.toString(),
+                            ratingName = state.value.ratingName.toString()
+                        )
 
-                        RatingNameAddressBronirovaniye(state)
+//                        RatingNameAddressBronirovaniye(state)
                     }
 
 
@@ -125,50 +126,13 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
 
                         Spacer(modifier = Modifier.size(20.dp))
 
-
-                        var phoneNumber by remember { mutableStateOf("") }
-
-                        OutlinedTextField(
-                            modifier = Modifier.fillMaxWidth(),
-                            value = phoneNumber,
-                            onValueChange = { phoneNumber = it },
-                            label = { Text("Номер телефона") },
-                            singleLine = true,
-                            colors = TextFieldDefaults.outlinedTextFieldColors(
-                                containerColor = Color("#F6F6F9".toColorInt()),
-                                textColor = Color("#14142B".toColorInt()),
-                                focusedLabelColor = Color("#A9ABB7".toColorInt()),
-                                unfocusedLabelColor = Color("#A9ABB7".toColorInt()),
-                                focusedBorderColor = Color.Transparent,
-                                unfocusedBorderColor = Color.Transparent
-                            ),
-                            shape = RoundedCornerShape(12.dp)
-
-
-                        )
-
+                        val phoneNumber = remember { mutableStateOf("") }
+                        CustomOutlinedTextField(test = phoneNumber, title = "Номер телефона")
 
                         Spacer(modifier = Modifier.size(8.dp))
 
-
-                        var eMail by remember { mutableStateOf("") }
-
-                        OutlinedTextField(
-                            modifier = Modifier.fillMaxWidth(),
-                            value = eMail,
-                            onValueChange = { eMail = it },
-                            label = { Text("Почта") },
-                            singleLine = true,
-                            colors = TextFieldDefaults.outlinedTextFieldColors(
-                                containerColor = Color("#F6F6F9".toColorInt()),
-                                textColor = Color("#14142B".toColorInt()),
-                                focusedLabelColor = Color("#A9ABB7".toColorInt()),
-                                unfocusedLabelColor = Color("#A9ABB7".toColorInt()),
-                                focusedBorderColor = Color.Transparent,
-                                unfocusedBorderColor = Color.Transparent,
-                            ),
-                            shape = RoundedCornerShape(12.dp)
-                        )
+                        val eMail = remember { mutableStateOf("") }
+                        CustomOutlinedTextField(test = eMail, title = "Почта")
 
                         Spacer(modifier = Modifier.size(8.dp))
 
@@ -188,6 +152,7 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
 
                 CustomCard {
                     Column(Modifier.padding(16.dp)) {
+
                         Row(Modifier.fillMaxWidth()) {
                             Text(text = "Турист", fontSize = 22.sp)
 
@@ -198,133 +163,30 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
 
                         }
 
-                        var name by remember { mutableStateOf(it.name) }
+                        val name = remember { mutableStateOf(it.name) }
+                        CustomOutlinedTextField(test = name, title = "Имя")
 
+                        val lastName = remember { mutableStateOf(it.lastName) }
+                        CustomOutlinedTextField(test = lastName, title = "Фамилия")
 
-                        OutlinedTextField(
-                            modifier = Modifier.fillMaxWidth(),
-                            value = name,
-                            onValueChange = { name = it },
-                            label = { Text("Имя") },
-                            singleLine = true,
-                            colors = TextFieldDefaults.outlinedTextFieldColors(
-                                containerColor = Color("#F6F6F9".toColorInt()),
-                                textColor = Color("#14142B".toColorInt()),
-                                focusedLabelColor = Color("#A9ABB7".toColorInt()),
-                                unfocusedLabelColor = Color("#A9ABB7".toColorInt()),
-                                focusedBorderColor = Color.Transparent,
-                                unfocusedBorderColor = Color.Transparent
-                            ),
-                            shape = RoundedCornerShape(12.dp)
+                        val dateOfBirth = remember { mutableStateOf(it.dateOfBirth.toString()) }
+                        CustomOutlinedTextField(test = dateOfBirth, title = "Дата рождения")
 
+                        val citizenship = remember { mutableStateOf(it.citizenship) }
+                        CustomOutlinedTextField(test = citizenship, title = "Номер телефона")
 
+                        val foreignPassportNumber =
+                            remember { mutableStateOf(it.foreignPassportNumber) }
+                        CustomOutlinedTextField(
+                            test = foreignPassportNumber,
+                            title = "Номер загранпаспорта"
                         )
 
-                        var lastName by remember { mutableStateOf(it.lastName) }
-
-                        OutlinedTextField(
-                            modifier = Modifier.fillMaxWidth(),
-                            value = lastName,
-                            onValueChange = { lastName = it },
-                            label = { Text("Фамилия") },
-                            singleLine = true,
-                            colors = TextFieldDefaults.outlinedTextFieldColors(
-                                containerColor = Color("#F6F6F9".toColorInt()),
-                                textColor = Color("#14142B".toColorInt()),
-                                focusedLabelColor = Color("#A9ABB7".toColorInt()),
-                                unfocusedLabelColor = Color("#A9ABB7".toColorInt()),
-                                focusedBorderColor = Color.Transparent,
-                                unfocusedBorderColor = Color.Transparent
-                            ),
-                            shape = RoundedCornerShape(12.dp)
-
-
-                        )
-
-
-                        var dateOfBirth by remember { mutableStateOf(it.dateOfBirth.toString()) }
-
-                        OutlinedTextField(
-                            modifier = Modifier.fillMaxWidth(),
-                            value = dateOfBirth,
-                            onValueChange = { dateOfBirth = it },
-                            label = { Text("Дата рождения") },
-                            singleLine = true,
-                            colors = TextFieldDefaults.outlinedTextFieldColors(
-                                containerColor = Color("#F6F6F9".toColorInt()),
-                                textColor = Color("#14142B".toColorInt()),
-                                focusedLabelColor = Color("#A9ABB7".toColorInt()),
-                                unfocusedLabelColor = Color("#A9ABB7".toColorInt()),
-                                focusedBorderColor = Color.Transparent,
-                                unfocusedBorderColor = Color.Transparent
-                            ),
-                            shape = RoundedCornerShape(12.dp)
-
-                        )
-
-                        // foreignPassportNumber, foreignPassportExpirationDate
-
-                        var foreignPassportNumber by remember { mutableStateOf(it.foreignPassportNumber) }
-
-                        OutlinedTextField(
-                            modifier = Modifier.fillMaxWidth(),
-                            value = foreignPassportNumber,
-                            onValueChange = { foreignPassportNumber = it },
-                            label = { Text("Номер загранпаспорта") },
-                            singleLine = true,
-                            colors = TextFieldDefaults.outlinedTextFieldColors(
-                                containerColor = Color("#F6F6F9".toColorInt()),
-                                textColor = Color("#14142B".toColorInt()),
-                                focusedLabelColor = Color("#A9ABB7".toColorInt()),
-                                unfocusedLabelColor = Color("#A9ABB7".toColorInt()),
-                                focusedBorderColor = Color.Transparent,
-                                unfocusedBorderColor = Color.Transparent
-                            ),
-                            shape = RoundedCornerShape(12.dp)
-
-
-                        )
-
-                        var foreignPassportExpirationDate by remember { mutableStateOf(it.foreignPassportExpirationDate.toString()) }
-
-                        OutlinedTextField(
-                            modifier = Modifier.fillMaxWidth(),
-                            value = foreignPassportExpirationDate,
-                            onValueChange = { foreignPassportExpirationDate = it },
-                            label = { Text("Срок действия загранпаспорта") },
-                            singleLine = true,
-                            colors = TextFieldDefaults.outlinedTextFieldColors(
-                                containerColor = Color("#F6F6F9".toColorInt()),
-                                textColor = Color("#14142B".toColorInt()),
-                                focusedLabelColor = Color("#A9ABB7".toColorInt()),
-                                unfocusedLabelColor = Color("#A9ABB7".toColorInt()),
-                                focusedBorderColor = Color.Transparent,
-                                unfocusedBorderColor = Color.Transparent
-                            ),
-                            shape = RoundedCornerShape(12.dp)
-
-
-                        )
-
-                        var citizenship by remember { mutableStateOf(it.citizenship) }
-
-                        OutlinedTextField(
-                            modifier = Modifier.fillMaxWidth(),
-                            value = citizenship,
-                            onValueChange = { citizenship = it },
-                            label = { Text("Гражданство") },
-                            singleLine = true,
-                            colors = TextFieldDefaults.outlinedTextFieldColors(
-                                containerColor = Color("#F6F6F9".toColorInt()),
-                                textColor = Color("#14142B".toColorInt()),
-                                focusedLabelColor = Color("#A9ABB7".toColorInt()),
-                                unfocusedLabelColor = Color("#A9ABB7".toColorInt()),
-                                focusedBorderColor = Color.Transparent,
-                                unfocusedBorderColor = Color.Transparent
-                            ),
-                            shape = RoundedCornerShape(12.dp)
-
-
+                        val foreignPassportExpirationDate =
+                            remember { mutableStateOf(it.foreignPassportExpirationDate.toString()) }
+                        CustomOutlinedTextField(
+                            test = foreignPassportExpirationDate,
+                            title = "Срок действия загранпаспорта"
                         )
 
 

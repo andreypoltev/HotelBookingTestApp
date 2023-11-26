@@ -45,7 +45,7 @@ import com.andreypoltev.hotelbookingtestapp.composables.CustomCard
 import com.andreypoltev.hotelbookingtestapp.composables.CustomColumn
 import com.andreypoltev.hotelbookingtestapp.composables.CustomPeculiaritiesCard
 import com.andreypoltev.hotelbookingtestapp.composables.CustomProgressIndicator
-import com.andreypoltev.hotelbookingtestapp.composables.RatingNameAddressHotel
+import com.andreypoltev.hotelbookingtestapp.composables.RatingNameAddress
 import com.andreypoltev.hotelbookingtestapp.util.Routes
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
@@ -122,7 +122,14 @@ fun HotelScreen(viewModel: HotelViewModel, navController: NavHostController) {
                             }
                         }
 
-                        RatingNameAddressHotel(state)
+                        RatingNameAddress(
+                            name = state.value.name.toString(),
+                            address = state.value.adress.toString(),
+                            rating = state.value.rating.toString(),
+                            ratingName = state.value.ratingName.toString()
+                        )
+
+//                        RatingNameAddressHotel(state)
 
 
                         Row(
