@@ -68,6 +68,7 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
             ), verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
 
+            // RatingNameAddress
             item {
                 CustomCard {
                     CustomColumn {
@@ -78,7 +79,6 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
                             ratingName = state.value.ratingName.toString()
                         )
 
-//                        RatingNameAddressBronirovaniye(state)
                     }
 
 
@@ -88,40 +88,65 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
             // Hotel info
             item {
                 CustomCard {
-                    Row(
-                        Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
-                        horizontalArrangement = Arrangement.SpaceAround
-                    ) {
-                        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                    CustomColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                        Row(Modifier.fillMaxWidth()) {
                             Text(text = "Вылет из")
-                            Text(text = "Страна, город")
-                            Text(text = "Даты")
-                            Text(text = "Кол-во ночей")
-                            Text(text = "Отель")
-                            Text(text = "Номер")
-                            Text(text = "Питание")
-                        }
 
+                            Spacer(modifier = Modifier.weight(0.5f))
 
-                        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                             Text(text = state.value.departure.toString())
-                            Text(text = state.value.arrivalCountry.toString())
-                            Text(text = state.value.tourDateStart.toString() + " – " + state.value.tourDateStop)
-                            Text(text = state.value.numberOfNights.toString() + " ночей")
-                            Text(text = state.value.hotelName.toString())
-                            Text(text = state.value.room.toString())
-                            Text(text = state.value.nutrition.toString())
-
-
                         }
 
-//                        Text(text = "Вылет из " + state.value.departure.toString())
+                        Row(Modifier.fillMaxWidth()) {
+                            Text(text = "Страна, город")
+
+                            Spacer(modifier = Modifier.weight(0.5f))
+
+                            Text(text = state.value.arrivalCountry.toString())
+                        }
+
+                        Row(Modifier.fillMaxWidth()) {
+                            Text(text = "Даты")
+
+                            Spacer(modifier = Modifier.weight(0.5f))
+
+                            Text(text = state.value.tourDateStart.toString() + " – " + state.value.tourDateStop)
+                        }
+
+                        Row(Modifier.fillMaxWidth()) {
+                            Text(text = "Кол-во ночей")
+
+                            Spacer(modifier = Modifier.weight(0.5f))
+
+                            Text(text = state.value.numberOfNights.toString() + " ночей")
+                        }
+
+                        Row(Modifier.fillMaxWidth()) {
+                            Text(text = "Отель")
+
+                            Spacer(modifier = Modifier.weight(0.5f))
+
+                            Text(text = state.value.hotelName.toString())
+                        }
+
+                        Row(Modifier.fillMaxWidth()) {
+                            Text(text = "Номер")
+
+                            Spacer(modifier = Modifier.weight(0.5f))
+
+                            Text(text = state.value.room.toString())
+                        }
+
+                        Row(Modifier.fillMaxWidth()) {
+                            Text(text = "Питание")
+
+                            Spacer(modifier = Modifier.weight(0.5f))
+
+                            Text(text = state.value.nutrition.toString())
+                        }
+
 
                     }
-
-
                 }
             }
 

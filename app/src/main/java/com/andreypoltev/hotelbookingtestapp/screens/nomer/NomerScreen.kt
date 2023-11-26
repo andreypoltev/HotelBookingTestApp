@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -78,129 +79,133 @@ fun NomerScreen(viewModel: NomerViewModel, navController: NavHostController, str
 
 
                 CustomCard {
-                    CustomColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-
+                    CustomColumn(verticalArrangement = Arrangement.spacedBy(0.dp)) {
                         CustomCard {
-                            CustomCard {
-
-                                Box(Modifier.fillMaxSize()) {
+                            Box(Modifier.fillMaxSize()) {
 
 
-                                    HorizontalPager(state = pagerState) { page ->
-                                        AsyncImage(
-                                            model = it.imageUrls?.get(page),
-                                            contentDescription = "Hotel Photo",
-                                            contentScale = ContentScale.Crop,
-                                            modifier = Modifier.aspectRatio(530f / 375f)
+                                HorizontalPager(state = pagerState) { page ->
+                                    AsyncImage(
+                                        model = it.imageUrls?.get(page),
+                                        contentDescription = "Hotel Photo",
+                                        contentScale = ContentScale.Crop,
+                                        modifier = Modifier.aspectRatio(530f / 375f)
 //                placeholder = painterResource(R.drawable.ic_call_answer)
-                                        )
+                                    )
 
 
-                                    }
+                                }
 
-                                    Card(
+                                Card(
+                                    Modifier
+                                        .wrapContentHeight()
+                                        .align(Alignment.BottomCenter)
+                                        .padding(bottom = 8.dp),
+                                    colors = CardDefaults.cardColors(containerColor = Color.White),
+                                    shape = RoundedCornerShape(4.dp)
+                                ) {
+
+
+                                    Row(
                                         Modifier
                                             .wrapContentHeight()
-                                            .align(Alignment.BottomCenter)
-                                            .padding(bottom = 8.dp),
-                                        colors = CardDefaults.cardColors(containerColor = Color.White),
-                                        shape = RoundedCornerShape(4.dp)
-                                    ) {
-
-
-                                        Row(
-                                            Modifier
-                                                .wrapContentHeight()
 //                                            .fillMaxWidth()
 //                                            .align(Alignment.BottomCenter)
-                                                .padding(horizontal = 4.dp, vertical = 4.dp),
-                                            horizontalArrangement = Arrangement.Center,
-                                            verticalAlignment = Alignment.CenterVertically
-                                        ) {
-                                            repeat(pagerState.pageCount) { iteration ->
-                                                val color =
-                                                    if (pagerState.currentPage == iteration) Color.Black else Color.Black.copy(
-                                                        0.05f
-                                                    )
-                                                Box(
-                                                    modifier = Modifier
-                                                        .padding(horizontal = 4.dp)
-                                                        .clip(CircleShape)
-                                                        .background(color)
-                                                        .size(8.dp)
+                                            .padding(horizontal = 4.dp, vertical = 4.dp),
+                                        horizontalArrangement = Arrangement.Center,
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        repeat(pagerState.pageCount) { iteration ->
+                                            val color =
+                                                if (pagerState.currentPage == iteration) Color.Black else Color.Black.copy(
+                                                    0.05f
                                                 )
-                                            }
+                                            Box(
+                                                modifier = Modifier
+                                                    .padding(horizontal = 4.dp)
+                                                    .clip(CircleShape)
+                                                    .background(color)
+                                                    .size(8.dp)
+                                            )
                                         }
                                     }
-
-                                }
-                            }
-
-
-
-                            Text(
-                                text = it.name.toString(),
-                                style = MaterialTheme.typography.titleLarge
-                            )
-
-                            FlowRow(
-                                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                                verticalArrangement = Arrangement.spacedBy(8.dp)
-                            ) {
-
-                                it.peculiarities?.forEach {
-                                    CustomPeculiaritiesCard(it.toString())
                                 }
 
                             }
-
-                            Card(
-                                shape = RoundedCornerShape(8.dp),
-                                colors = CardDefaults.cardColors(
-                                    containerColor = Color("#0D72FF".toColorInt()).copy(0.1f)
-                                ),
-                                onClick = {
-
-                                }
-                            ) {
-                                Row(
-                                    Modifier.padding(horizontal = 12.dp, vertical = 4.dp),
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    Text(
-                                        text = "Подробнее о номере",
-                                        fontSize = 16.sp,
-                                        color = Color("#0D72FF".toColorInt()),
-                                        fontWeight = FontWeight.SemiBold
-                                    )
-
-                                    Icon(
-                                        painter = painterResource(id = com.andreypoltev.hotelbookingtestapp.R.drawable.nomer_details_forward_button),
-                                        contentDescription = "Room Details",
-                                        tint = Color("#0D72FF".toColorInt())
-                                    )
-
-
-                                }
-
-
-                            }
-
-
-
-                            Text(
-                                text = formatAsCurrency(it.price.toString()),
-                                style = MaterialTheme.typography.headlineLarge,
-                                fontWeight = FontWeight.Light
-                            )
-
-
-                            CustomButton(
-                                text = "Выбрать номер",
-                                navController = navController,
-                                navDestination = Routes.bronirovaniyeScreen
-                            )
                         }
+                        
+                        Spacer(modifier = Modifier.size(8.dp))
+
+                        Text(
+                            text = it.name.toString(),
+                            style = MaterialTheme.typography.titleLarge
+                        )
+
+                        Spacer(modifier = Modifier.size(8.dp))
+
+
+                        FlowRow(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+
+                            it.peculiarities?.forEach {
+                                CustomPeculiaritiesCard(it.toString())
+                            }
+
+                        }
+
+                        Spacer(modifier = Modifier.size(8.dp))
+
+
+                        Card(
+                            shape = RoundedCornerShape(8.dp),
+                            colors = CardDefaults.cardColors(
+                                containerColor = Color("#0D72FF".toColorInt()).copy(0.1f)
+                            ),
+                            onClick = {}
+                        ) {
+                            Row(
+                                Modifier.padding(horizontal = 12.dp, vertical = 4.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = "Подробнее о номере",
+                                    fontSize = 16.sp,
+                                    color = Color("#0D72FF".toColorInt()),
+                                    fontWeight = FontWeight.SemiBold
+                                )
+
+                                Icon(
+                                    painter = painterResource(id = com.andreypoltev.hotelbookingtestapp.R.drawable.nomer_details_forward_button),
+                                    contentDescription = "Room Details",
+                                    tint = Color("#0D72FF".toColorInt())
+                                )
+
+
+                            }
+
+
+                        }
+
+                        Spacer(modifier = Modifier.size(16.dp))
+
+                        Text(
+                            text = formatAsCurrency(it.price.toString()),
+                            style = MaterialTheme.typography.headlineLarge,
+                            fontWeight = FontWeight.Light
+                        )
+
+                        Spacer(modifier = Modifier.size(16.dp))
+
+
+
+                        CustomButton(
+                            text = "Выбрать номер",
+                            navController = navController,
+                            navDestination = Routes.bronirovaniyeScreen
+                        )
+
 
                     }
                 }

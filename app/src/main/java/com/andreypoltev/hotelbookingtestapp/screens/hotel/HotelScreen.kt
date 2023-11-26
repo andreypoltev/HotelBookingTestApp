@@ -48,7 +48,6 @@ import coil.compose.AsyncImage
 import com.andreypoltev.hotelbookingtestapp.composables.CustomBottomBar
 import com.andreypoltev.hotelbookingtestapp.composables.CustomCard
 import com.andreypoltev.hotelbookingtestapp.composables.CustomColumn
-import com.andreypoltev.hotelbookingtestapp.composables.CustomPageIndicator
 import com.andreypoltev.hotelbookingtestapp.composables.CustomPeculiaritiesCard
 import com.andreypoltev.hotelbookingtestapp.composables.CustomProgressIndicator
 import com.andreypoltev.hotelbookingtestapp.composables.RatingNameAddress
@@ -177,7 +176,6 @@ fun HotelScreen(viewModel: HotelViewModel, navController: NavHostController) {
 //                                imageUri = state.value.imageUrls?.get(page).toString(),
 //                                contentDescription =
 //                            )
-
 
 
                         }
