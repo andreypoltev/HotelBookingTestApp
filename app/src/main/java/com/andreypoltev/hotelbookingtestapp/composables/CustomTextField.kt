@@ -2,11 +2,9 @@ package com.andreypoltev.hotelbookingtestapp.composables
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.selection.LocalTextSelectionColors
-import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -15,30 +13,25 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.toColorInt
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CustomOutlinedTextField(test: MutableState<String>, title: String) {
+fun CustomTextField(test: MutableState<String>, title: String) {
 
-//    Text(text = "Zvada")
-
-
-    OutlinedTextField(
+    TextField(
         modifier = Modifier.fillMaxWidth(),
         value = test.value,
+        shape = RoundedCornerShape(12.dp),
         onValueChange = { test.value = it },
-        label = { Text(title) },
+        label = { Text(text = title) },
         singleLine = true,
-        colors = TextFieldDefaults.outlinedTextFieldColors(
+        colors = TextFieldDefaults.textFieldColors(
             containerColor = Color("#F6F6F9".toColorInt()),
-            textColor = Color("#14142B".toColorInt()),
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
             focusedLabelColor = Color("#A9ABB7".toColorInt()),
-            unfocusedLabelColor = Color("#A9ABB7".toColorInt()),
-            focusedBorderColor = Color.Transparent,
-            unfocusedBorderColor = Color.Transparent
-        ),
-        shape = RoundedCornerShape(12.dp)
-
-
+            unfocusedLabelColor = Color("#A9ABB7".toColorInt())
+        )
     )
+
 
 }

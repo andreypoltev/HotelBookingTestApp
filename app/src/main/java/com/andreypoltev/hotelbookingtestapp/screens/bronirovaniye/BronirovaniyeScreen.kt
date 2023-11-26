@@ -1,23 +1,37 @@
 package com.andreypoltev.hotelbookingtestapp.screens.bronirovaniye
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.toColorInt
@@ -27,6 +41,7 @@ import com.andreypoltev.hotelbookingtestapp.composables.CustomBottomBar
 import com.andreypoltev.hotelbookingtestapp.composables.CustomCard
 import com.andreypoltev.hotelbookingtestapp.composables.CustomColumn
 import com.andreypoltev.hotelbookingtestapp.composables.CustomOutlinedTextField
+import com.andreypoltev.hotelbookingtestapp.composables.CustomTextField
 import com.andreypoltev.hotelbookingtestapp.composables.CustomTopBar
 import com.andreypoltev.hotelbookingtestapp.composables.RatingNameAddress
 import com.andreypoltev.hotelbookingtestapp.util.Routes
@@ -118,7 +133,7 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
             // Информация о покупателе
             item {
                 CustomCard {
-                    Column(Modifier.padding(16.dp)) {
+                    Column(Modifier.padding(vertical = 12.dp, horizontal = 16.dp)) {
                         Text(
                             text = "Информация о покупателе", fontSize = 22.sp,
                             color = Color.Black
@@ -127,12 +142,12 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
                         Spacer(modifier = Modifier.size(20.dp))
 
                         val phoneNumber = remember { mutableStateOf("") }
-                        CustomOutlinedTextField(test = phoneNumber, title = "Номер телефона")
+                        CustomTextField(test = phoneNumber, title = "Номер телефона")
 
                         Spacer(modifier = Modifier.size(8.dp))
 
                         val eMail = remember { mutableStateOf("") }
-                        CustomOutlinedTextField(test = eMail, title = "Почта")
+                        CustomTextField(test = eMail, title = "Почта")
 
                         Spacer(modifier = Modifier.size(8.dp))
 
@@ -151,40 +166,45 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
             items(tourists.value) {
 
                 CustomCard {
-                    Column(Modifier.padding(16.dp)) {
+                    CustomColumn {
 
-                        Row(Modifier.fillMaxWidth()) {
+                        Row(
+                            Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
                             Text(text = "Турист", fontSize = 22.sp)
 
                             Spacer(modifier = Modifier.weight(1f))
 
-                            AddTouristButton(viewModel)
+
+//                            AddTouristButton(viewModel)
 
 
                         }
 
+
                         val name = remember { mutableStateOf(it.name) }
-                        CustomOutlinedTextField(test = name, title = "Имя")
+                        CustomTextField(test = name, title = "Имя")
 
                         val lastName = remember { mutableStateOf(it.lastName) }
-                        CustomOutlinedTextField(test = lastName, title = "Фамилия")
+                        CustomTextField(test = lastName, title = "Фамилия")
 
                         val dateOfBirth = remember { mutableStateOf(it.dateOfBirth.toString()) }
-                        CustomOutlinedTextField(test = dateOfBirth, title = "Дата рождения")
+                        CustomTextField(test = dateOfBirth, title = "Дата рождения")
 
                         val citizenship = remember { mutableStateOf(it.citizenship) }
-                        CustomOutlinedTextField(test = citizenship, title = "Номер телефона")
+                        CustomTextField(test = citizenship, title = "Номер телефона")
 
                         val foreignPassportNumber =
                             remember { mutableStateOf(it.foreignPassportNumber) }
-                        CustomOutlinedTextField(
+                        CustomTextField(
                             test = foreignPassportNumber,
                             title = "Номер загранпаспорта"
                         )
 
                         val foreignPassportExpirationDate =
                             remember { mutableStateOf(it.foreignPassportExpirationDate.toString()) }
-                        CustomOutlinedTextField(
+                        CustomTextField(
                             test = foreignPassportExpirationDate,
                             title = "Срок действия загранпаспорта"
                         )
@@ -202,12 +222,40 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
             // Add tourist
             item {
                 CustomCard {
-                    Row(Modifier.padding(16.dp)) {
+                    Row(Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
                         Text(text = "Добавить туриста", fontSize = 22.sp)
 
                         Spacer(modifier = Modifier.weight(1f))
 
-                        AddTouristButton(viewModel)
+                        Card(
+                            onClick = { viewModel.addTourist() },
+                            shape = RoundedCornerShape(8.dp),
+                            modifier = Modifier.size(32.dp),
+                            colors = CardDefaults.cardColors(containerColor = Color("#0D72FF".toColorInt()))
+                        ) {
+                            Box(
+                                modifier = Modifier.fillMaxSize(),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Icon(
+                                    painter = painterResource(id = com.andreypoltev.hotelbookingtestapp.R.drawable.add_tourist_button),
+                                    contentDescription = "Add tourist button",
+                                    modifier = Modifier.size(24.dp),
+                                    tint = Color.White
+                                )
+//                                Icon(
+//                                    modifier = Modifier.size(24.dp),
+//                                    imageVector = ,
+//                                    contentDescription = null, // Change as needed
+//                                    tint = Color.White
+//                                )
+                            }
+
+
+                        }
+
+
+//                        AddTouristButton(viewModel)
 
 
                     }
