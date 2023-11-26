@@ -22,7 +22,7 @@ fun Navigation(
 
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Routes.bronirovaniyeScreen) {
+    NavHost(navController = navController, startDestination = Routes.hotelScreen) {
 
 
         composable(Routes.hotelScreen) {

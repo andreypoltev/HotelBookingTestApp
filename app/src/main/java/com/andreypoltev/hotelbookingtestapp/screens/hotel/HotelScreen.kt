@@ -1,7 +1,9 @@
 package com.andreypoltev.hotelbookingtestapp.screens.hotel
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -11,9 +13,12 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -29,6 +34,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -42,6 +48,7 @@ import coil.compose.AsyncImage
 import com.andreypoltev.hotelbookingtestapp.composables.CustomBottomBar
 import com.andreypoltev.hotelbookingtestapp.composables.CustomCard
 import com.andreypoltev.hotelbookingtestapp.composables.CustomColumn
+import com.andreypoltev.hotelbookingtestapp.composables.CustomPageIndicator
 import com.andreypoltev.hotelbookingtestapp.composables.CustomPeculiaritiesCard
 import com.andreypoltev.hotelbookingtestapp.composables.CustomProgressIndicator
 import com.andreypoltev.hotelbookingtestapp.composables.RatingNameAddress
@@ -112,17 +119,67 @@ fun HotelScreen(viewModel: HotelViewModel, navController: NavHostController) {
                     CustomColumn {
 
                         Card {
-                            HorizontalPager(state = pagerState) { page ->
-                                AsyncImage(
-                                    model = state.value.imageUrls?.get(page),
-                                    contentDescription = state.value.name,
-                                    contentScale = ContentScale.Crop,
-                                    modifier = Modifier.aspectRatio(530f / 375f)
+                            Box {
+                                HorizontalPager(state = pagerState) { page ->
+                                    AsyncImage(
+                                        model = state.value.imageUrls?.get(page),
+                                        contentDescription = state.value.name,
+                                        contentScale = ContentScale.Crop,
+                                        modifier = Modifier.aspectRatio(530f / 375f)
 //                placeholder = painterResource(R.drawable.ic_call_answer)
-                                )
+                                    )
 
+
+                                }
+
+                                Card(
+                                    Modifier
+                                        .wrapContentHeight()
+                                        .align(Alignment.BottomCenter)
+                                        .padding(bottom = 8.dp),
+                                    colors = CardDefaults.cardColors(containerColor = Color.White),
+                                    shape = RoundedCornerShape(4.dp)
+                                ) {
+
+
+                                    Row(
+                                        Modifier
+                                            .wrapContentHeight()
+//                                            .fillMaxWidth()
+//                                            .align(Alignment.BottomCenter)
+                                            .padding(horizontal = 4.dp, vertical = 4.dp),
+                                        horizontalArrangement = Arrangement.Center,
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        repeat(pagerState.pageCount) { iteration ->
+                                            val color =
+                                                if (pagerState.currentPage == iteration) Color.Black else Color.Black.copy(
+                                                    0.05f
+                                                )
+                                            Box(
+                                                modifier = Modifier
+                                                    .padding(horizontal = 4.dp)
+                                                    .clip(CircleShape)
+                                                    .background(color)
+                                                    .size(8.dp)
+                                            )
+                                        }
+                                    }
+                                }
+
+//                                HorizontalPagerIndicator()
+//                                HorizontalPagerIndicator
 
                             }
+
+//                            CustomPageIndicator(
+//                                pagerState = pagerState,
+//                                imageUri = state.value.imageUrls?.get(page).toString(),
+//                                contentDescription =
+//                            )
+
+
+
                         }
 
                         RatingNameAddress(
