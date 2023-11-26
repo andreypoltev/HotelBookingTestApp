@@ -10,8 +10,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -32,6 +30,7 @@ import androidx.navigation.NavHostController
 import com.andreypoltev.hotelbookingtestapp.composables.AddTouristButton
 import com.andreypoltev.hotelbookingtestapp.composables.CustomBottomBar
 import com.andreypoltev.hotelbookingtestapp.composables.CustomCard
+import com.andreypoltev.hotelbookingtestapp.composables.CustomColumn
 import com.andreypoltev.hotelbookingtestapp.composables.CustomTopBar
 import com.andreypoltev.hotelbookingtestapp.composables.RatingNameAddressBronirovaniye
 import com.andreypoltev.hotelbookingtestapp.util.Routes
@@ -65,12 +64,8 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
 
 
             item {
-                Card(
-                    Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(containerColor = Color.White),
-                    shape = RoundedCornerShape(16.dp)
-                ) {
-                    Column(Modifier.padding(16.dp)) {
+                CustomCard {
+                    CustomColumn {
 
                         RatingNameAddressBronirovaniye(state)
                     }
@@ -81,10 +76,7 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
 
             // Hotel info
             item {
-                Card(
-                    Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(containerColor = Color.White)
-                ) {
+                CustomCard {
                     Row(
                         Modifier
                             .fillMaxWidth()
@@ -194,11 +186,7 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
 
             items(tourists.value) {
 
-                Card(
-                    Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(containerColor = Color.White),
-                    shape = RoundedCornerShape(16.dp)
-                ) {
+                CustomCard {
                     Column(Modifier.padding(16.dp)) {
                         Row(Modifier.fillMaxWidth()) {
                             Text(text = "Турист", fontSize = 22.sp)
@@ -351,11 +339,7 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
 
             // Add tourist
             item {
-                Card(
-                    Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(containerColor = Color.White),
-                    shape = RoundedCornerShape(16.dp)
-                ) {
+                CustomCard {
                     Row(Modifier.padding(16.dp)) {
                         Text(text = "Добавить туриста", fontSize = 22.sp)
 
@@ -370,11 +354,7 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
 
             // Total
             item {
-                Card(
-                    Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(containerColor = Color.White),
-                    shape = RoundedCornerShape(16.dp)
-                ) {
+                CustomCard {
                     Column(Modifier.padding(16.dp), Arrangement.spacedBy(16.dp)) {
                         Row {
                             Text(text = "Тур", color = Color("#828796".toColorInt()))
@@ -402,9 +382,9 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
                             Spacer(modifier = Modifier.weight(1f))
                             Text(
                                 text = (
-                                        (state.value.tourPrice?.toInt()
-                                            ?: 0) + (state.value.fuelCharge?.toInt()
-                                            ?: 0) + (state.value.serviceCharge?.toInt()
+                                        (state.value.tourPrice
+                                            ?: 0) + (state.value.fuelCharge
+                                            ?: 0) + (state.value.serviceCharge
                                             ?: 0)).toString()
                             )
 

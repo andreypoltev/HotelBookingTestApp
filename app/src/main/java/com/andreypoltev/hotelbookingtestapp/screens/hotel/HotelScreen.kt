@@ -19,6 +19,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -42,6 +43,7 @@ import coil.compose.AsyncImage
 import com.andreypoltev.hotelbookingtestapp.composables.CustomBottomBar
 import com.andreypoltev.hotelbookingtestapp.composables.CustomCard
 import com.andreypoltev.hotelbookingtestapp.composables.CustomColumn
+import com.andreypoltev.hotelbookingtestapp.composables.CustomPeculiaritiesCard
 import com.andreypoltev.hotelbookingtestapp.composables.CustomProgressIndicator
 import com.andreypoltev.hotelbookingtestapp.composables.RatingNameAddressHotel
 import com.andreypoltev.hotelbookingtestapp.util.Routes
@@ -146,10 +148,7 @@ fun HotelScreen(viewModel: HotelViewModel, navController: NavHostController) {
 
                 }
 
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(containerColor = Color.White)
-                ) {
+                CustomCard {
                     Column(
                         modifier = Modifier.padding(16.dp),
                         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -170,22 +169,7 @@ fun HotelScreen(viewModel: HotelViewModel, navController: NavHostController) {
 
                                 state.value.aboutTheHotel?.peculiarities?.forEach {
                                     item {
-                                        Card(
-                                            colors = CardDefaults.cardColors(
-                                                containerColor = Color(
-                                                    "#FBFBFC".toColorInt()
-                                                )
-                                            ),
-                                        ) {
-                                            Text(
-                                                text = it.toString(),
-                                                Modifier.padding(
-                                                    horizontal = 12.dp,
-                                                    vertical = 8.dp
-                                                ),
-                                                color = Color("#828796".toColorInt())
-                                            )
-                                        }
+                                        CustomPeculiaritiesCard(it.toString())
                                     }
                                 }
 
@@ -199,68 +183,122 @@ fun HotelScreen(viewModel: HotelViewModel, navController: NavHostController) {
                             modifier = Modifier.fillMaxWidth(),
                             colors = CardDefaults.cardColors(containerColor = Color("#FBFBFC".toColorInt()))
                         ) {
+
                             Column(
                                 Modifier.padding(16.dp),
                                 verticalArrangement = Arrangement.spacedBy(12.dp)
                             ) {
 
-                                Row(
-                                    Modifier.fillMaxWidth(),
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                                Card(
+                                    onClick = {},
+                                    colors = CardDefaults.cardColors(containerColor = Color.Transparent)
                                 ) {
 
-                                    Icon(
-                                        painterResource(id = com.andreypoltev.hotelbookingtestapp.R.drawable.emoji_happy),
-                                        "Forward Arrow",
-                                        Modifier.size(24.dp)
-                                    )
+
+                                    Row(
+                                        Modifier.fillMaxWidth(),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                                    ) {
+
+                                        Icon(
+                                            painterResource(id = com.andreypoltev.hotelbookingtestapp.R.drawable.emoji_happy),
+                                            "Forward Arrow",
+                                            Modifier.size(24.dp)
+                                        )
 
 //                                Icon()
-                                    Column() {
-                                        Text(text = "Удобства", fontSize = 16.sp)
-                                        Text(text = "Самое необходимое", fontSize = 14.sp)
+                                        Column() {
+                                            Text(text = "Удобства", fontSize = 16.sp)
+                                            Text(text = "Самое необходимое", fontSize = 14.sp)
+
+                                        }
+
+                                        Spacer(modifier = Modifier.weight(1f))
+                                        Icon(
+                                            painterResource(id = com.andreypoltev.hotelbookingtestapp.R.drawable.forwardarrow),
+                                            "Forward Arrow",
+                                            Modifier
+                                                .size(20.dp)
+                                        )
+
+
                                     }
-
-                                    Spacer(modifier = Modifier.weight(1f))
-                                    Icon(
-                                        painterResource(id = com.andreypoltev.hotelbookingtestapp.R.drawable.forwardarrow),
-                                        "Forward Arrow",
-                                        Modifier
-                                            .size(20.dp)
-                                    )
-
 
                                 }
 
+                                Divider(Modifier.padding(start = 36.dp))
 
-                                Row(
-                                    Modifier.fillMaxWidth(),
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                                Card(
+                                    onClick = {},
+                                    colors = CardDefaults.cardColors(containerColor = Color.Transparent)
                                 ) {
 
-                                    Icon(
-                                        painterResource(id = com.andreypoltev.hotelbookingtestapp.R.drawable.emoji_happy),
-                                        "Forward Arrow",
-                                        Modifier.size(24.dp)
-                                    )
+                                    Row(
+                                        Modifier.fillMaxWidth(),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                                    ) {
+
+                                        Icon(
+                                            painterResource(id = com.andreypoltev.hotelbookingtestapp.R.drawable.tick_square),
+                                            "Forward Arrow",
+                                            Modifier.size(24.dp)
+                                        )
 
 //                                Icon()
-                                    Column() {
-                                        Text(text = "Удобства", fontSize = 16.sp)
-                                        Text(text = "Самое необходимое", fontSize = 14.sp)
+                                        Column() {
+                                            Text(text = "Что включено", fontSize = 16.sp)
+                                            Text(text = "Самое необходимое", fontSize = 14.sp)
+                                        }
+
+                                        Spacer(modifier = Modifier.weight(1f))
+                                        Icon(
+                                            painterResource(id = com.andreypoltev.hotelbookingtestapp.R.drawable.forwardarrow),
+                                            "Forward Arrow",
+                                            Modifier
+                                                .size(20.dp)
+                                        )
+
+
                                     }
+                                }
 
-                                    Spacer(modifier = Modifier.weight(1f))
-                                    Icon(
-                                        painterResource(id = com.andreypoltev.hotelbookingtestapp.R.drawable.forwardarrow),
-                                        "Forward Arrow",
-                                        Modifier
-                                            .size(20.dp)
-                                    )
+                                Divider(Modifier.padding(start = 36.dp))
+
+                                Card(
+                                    onClick = {},
+                                    colors = CardDefaults.cardColors(containerColor = Color.Transparent)
+                                ) {
+
+                                    Row(
+                                        Modifier.fillMaxWidth(),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                                    ) {
+
+                                        Icon(
+                                            painterResource(id = com.andreypoltev.hotelbookingtestapp.R.drawable.close_square),
+                                            "Forward Arrow",
+                                            Modifier.size(24.dp)
+                                        )
+
+//                                Icon()
+                                        Column() {
+                                            Text(text = "Что не включено", fontSize = 16.sp)
+                                            Text(text = "Самое необходимое", fontSize = 14.sp)
+                                        }
+
+                                        Spacer(modifier = Modifier.weight(1f))
+                                        Icon(
+                                            painterResource(id = com.andreypoltev.hotelbookingtestapp.R.drawable.forwardarrow),
+                                            "Forward Arrow",
+                                            Modifier
+                                                .size(20.dp)
+                                        )
 
 
+                                    }
                                 }
 
 
