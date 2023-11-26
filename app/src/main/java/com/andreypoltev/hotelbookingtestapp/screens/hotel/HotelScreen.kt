@@ -43,6 +43,7 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.andreypoltev.hotelbookingtestapp.util.Routes
 import com.andreypoltev.hotelbookingtestapp.composables.CustomBottomBar
+import com.andreypoltev.hotelbookingtestapp.composables.CustomProgressIndicator
 import com.andreypoltev.hotelbookingtestapp.composables.RatingNameAddressHotel
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
@@ -66,14 +67,8 @@ fun HotelScreen(viewModel: HotelViewModel, navController: NavHostController) {
     }
 
     if (isLoading) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .size(48.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            CircularProgressIndicator()
-        }
+        CustomProgressIndicator()
+
     } else {
 
 
@@ -85,7 +80,7 @@ fun HotelScreen(viewModel: HotelViewModel, navController: NavHostController) {
                 CustomBottomBar(
                     text = "К выбору номера",
                     navController = navController,
-                    navDestination = Routes.nomerScreen
+                    navDestination = Routes.nomerScreen + "/" + state.value.name
                 )
             }
         ) {

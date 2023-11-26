@@ -31,7 +31,7 @@ fun CustomButton(text: String, navController: NavHostController, navDestination:
     Button(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 20.dp, vertical = 8.dp),
+            .padding(horizontal = 16.dp, vertical = 12.dp),
         onClick = { navController.navigate(navDestination) },
         shape = RoundedCornerShape(16.dp),
         colors = ButtonDefaults.buttonColors(

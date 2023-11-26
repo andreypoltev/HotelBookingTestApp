@@ -30,8 +30,8 @@ fun Navigation(
 
         }
 
-        composable(Routes.nomerScreen) {
-            NomerScreen(viewModel = nomerViewModel, navController)
+        composable(route = Routes.nomerScreen + "/{hotel_name}") {
+            NomerScreen(viewModel = nomerViewModel, navController, it.arguments?.getString("hotel_name")?: "Отель")
 
 
         }

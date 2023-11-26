@@ -35,7 +35,7 @@ import com.andreypoltev.hotelbookingtestapp.composables.CustomTopBar
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
-fun NomerScreen(viewModel: NomerViewModel, navController: NavHostController) {
+fun NomerScreen(viewModel: NomerViewModel, navController: NavHostController, string: String) {
 
     val state = viewModel.state.collectAsState()
 
@@ -43,7 +43,7 @@ fun NomerScreen(viewModel: NomerViewModel, navController: NavHostController) {
 
 
     Scaffold(topBar = {
-        CustomTopBar(text = "HotelName", navController = navController)
+        CustomTopBar(text = string, navController = navController)
     }) {
         LazyColumn(
             modifier = Modifier.padding(
