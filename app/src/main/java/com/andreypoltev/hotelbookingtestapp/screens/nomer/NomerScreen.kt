@@ -2,6 +2,8 @@ package com.andreypoltev.hotelbookingtestapp.screens.nomer
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding
@@ -38,7 +40,10 @@ import com.andreypoltev.hotelbookingtestapp.composables.CustomPeculiaritiesCard
 import com.andreypoltev.hotelbookingtestapp.composables.CustomTopBar
 import com.andreypoltev.hotelbookingtestapp.util.Routes
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
+@OptIn(
+    ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class,
+    ExperimentalLayoutApi::class
+)
 @Composable
 fun NomerScreen(viewModel: NomerViewModel, navController: NavHostController, string: String) {
 
@@ -90,14 +95,15 @@ fun NomerScreen(viewModel: NomerViewModel, navController: NavHostController, str
 
                         Text(text = it.name.toString(), style = MaterialTheme.typography.titleLarge)
 
-                        LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-
+                        FlowRow(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
 
                             it.peculiarities?.forEach {
-                                item {
-                                    CustomPeculiaritiesCard(it.toString())
-                                }
+                                CustomPeculiaritiesCard(it.toString())
                             }
+
                         }
 
                         Card(

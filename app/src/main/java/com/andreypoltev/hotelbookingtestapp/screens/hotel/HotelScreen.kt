@@ -3,14 +3,21 @@ package com.andreypoltev.hotelbookingtestapp.screens.hotel
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.staggeredgrid.LazyHorizontalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -35,6 +42,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.toColorInt
@@ -48,7 +56,10 @@ import com.andreypoltev.hotelbookingtestapp.composables.CustomProgressIndicator
 import com.andreypoltev.hotelbookingtestapp.composables.RatingNameAddress
 import com.andreypoltev.hotelbookingtestapp.util.Routes
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
+@OptIn(
+    ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class,
+    ExperimentalLayoutApi::class
+)
 @Composable
 fun HotelScreen(viewModel: HotelViewModel, navController: NavHostController) {
 
@@ -156,33 +167,54 @@ fun HotelScreen(viewModel: HotelViewModel, navController: NavHostController) {
                 }
 
                 CustomCard {
-                    Column(
-                        modifier = Modifier.padding(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(16.dp)
-                    ) {
+                    CustomColumn {
 
                         Text(text = "Об отеле", style = MaterialTheme.typography.headlineMedium)
 
+                        FlowRow(
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
 
-
-                        LazyHorizontalStaggeredGrid(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .heightIn(max = 80.dp),
-                            verticalArrangement = Arrangement.spacedBy(8.dp),
-                            horizontalItemSpacing = 8.dp,
-                            rows = StaggeredGridCells.Fixed(2),
-                            content = {
-
-                                state.value.aboutTheHotel?.peculiarities?.forEach {
-                                    item {
-                                        CustomPeculiaritiesCard(it.toString())
-                                    }
-                                }
-
-
+                            state.value.aboutTheHotel?.peculiarities?.forEach {
+                                CustomPeculiaritiesCard(it.toString())
                             }
-                        )
+
+                        }
+
+//                        LazyVerticalGrid(
+//
+//                            modifier = Modifier
+//                                .heightIn(max = 100.dp),
+//                            columns = GridCells.Adaptive(minSize = 128.dp)
+//                        ) {
+//                            state.value.aboutTheHotel?.peculiarities?.forEach {
+//                                item {
+//                                    CustomPeculiaritiesCard(it.toString())
+//                                }
+//                            }
+//
+//                        }
+
+
+//                        LazyHorizontalStaggeredGrid(
+//                            modifier = Modifier
+//                                .fillMaxWidth()
+//                                .heightIn(max = 80.dp),
+//                            verticalArrangement = Arrangement.spacedBy(8.dp),
+//                            horizontalItemSpacing = 8.dp,
+//                            rows = StaggeredGridCells.Adaptive(200.dp),
+//                            content = {
+//
+//                                state.value.aboutTheHotel?.peculiarities?.forEach {
+//                                    item {
+//                                        CustomPeculiaritiesCard(it.toString())
+//                                    }
+//                                }
+//
+//
+//                            }
+//                        )
 
                         Text(text = state.value.aboutTheHotel?.description.toString())
 
