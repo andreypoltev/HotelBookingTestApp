@@ -2,8 +2,8 @@ package com.andreypoltev.hotelbookingtestapp.screens.bronirovaniye
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.andreypoltev.hotelbookingtestapp.util.Links
 import com.andreypoltev.hotelbookingtestapp.Tourist
+import com.andreypoltev.hotelbookingtestapp.util.Links
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.cio.CIO

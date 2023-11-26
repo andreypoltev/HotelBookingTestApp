@@ -29,11 +29,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.toColorInt
 import androidx.navigation.NavHostController
-import com.andreypoltev.hotelbookingtestapp.util.Routes
+import com.andreypoltev.hotelbookingtestapp.composables.AddTouristButton
 import com.andreypoltev.hotelbookingtestapp.composables.CustomBottomBar
+import com.andreypoltev.hotelbookingtestapp.composables.CustomCard
 import com.andreypoltev.hotelbookingtestapp.composables.CustomTopBar
 import com.andreypoltev.hotelbookingtestapp.composables.RatingNameAddressBronirovaniye
-import com.andreypoltev.hotelbookingtestapp.composables.AddTouristButton
+import com.andreypoltev.hotelbookingtestapp.util.Routes
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -123,11 +124,7 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
 
             // Информация о покупателе
             item {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(containerColor = Color.White),
-                    shape = RoundedCornerShape(16.dp)
-                ) {
+                CustomCard {
                     Column(Modifier.padding(16.dp)) {
                         Text(
                             text = "Информация о покупателе", fontSize = 22.sp,
@@ -343,13 +340,7 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
                         )
 
 
-
-
-
-
                     }
-
-
 
 
                 }

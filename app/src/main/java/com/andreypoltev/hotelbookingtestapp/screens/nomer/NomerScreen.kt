@@ -30,8 +30,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.andreypoltev.hotelbookingtestapp.util.Routes
+import com.andreypoltev.hotelbookingtestapp.composables.CustomCard
+import com.andreypoltev.hotelbookingtestapp.composables.CustomColumn
 import com.andreypoltev.hotelbookingtestapp.composables.CustomTopBar
+import com.andreypoltev.hotelbookingtestapp.util.Routes
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
@@ -63,13 +65,8 @@ fun NomerScreen(viewModel: NomerViewModel, navController: NavHostController, str
                 }
 
 
-                Card(
-                    Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(16.dp),
-//                    colors = CardDefaults.cardColors(containerColor = Color("#FFFFFF".toColorInt()))
-//                    colors = CardDefaults.cardColors(containerColor = Color.White)
-                ) {
-                    Column(Modifier.padding(16.dp)) {
+                CustomCard {
+                    CustomColumn {
 
                         Card {
 

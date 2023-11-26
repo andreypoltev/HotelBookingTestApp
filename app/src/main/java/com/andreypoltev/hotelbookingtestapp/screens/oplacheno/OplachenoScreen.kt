@@ -21,10 +21,10 @@ import androidx.compose.ui.unit.sp
 import androidx.core.graphics.toColorInt
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.andreypoltev.hotelbookingtestapp.util.Routes
 import com.andreypoltev.hotelbookingtestapp.composables.CustomBottomBar
 import com.andreypoltev.hotelbookingtestapp.composables.CustomTopBar
 import com.andreypoltev.hotelbookingtestapp.screens.hotel.HotelViewModel
+import com.andreypoltev.hotelbookingtestapp.util.Routes
 import kotlin.random.Random
 
 

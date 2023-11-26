@@ -8,8 +8,8 @@ import com.andreypoltev.hotelbookingtestapp.screens.bronirovaniye.BronirovaniyeS
 import com.andreypoltev.hotelbookingtestapp.screens.bronirovaniye.BronirovaniyeViewModel
 import com.andreypoltev.hotelbookingtestapp.screens.hotel.HotelScreen
 import com.andreypoltev.hotelbookingtestapp.screens.hotel.HotelViewModel
-import com.andreypoltev.hotelbookingtestapp.screens.nomer.NomerViewModel
 import com.andreypoltev.hotelbookingtestapp.screens.nomer.NomerScreen
+import com.andreypoltev.hotelbookingtestapp.screens.nomer.NomerViewModel
 import com.andreypoltev.hotelbookingtestapp.screens.oplacheno.OplachenoScreen
 import com.andreypoltev.hotelbookingtestapp.util.Routes
 

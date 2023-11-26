@@ -2,12 +2,10 @@ package com.andreypoltev.hotelbookingtestapp.screens.hotel
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -21,7 +19,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -36,15 +33,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.toColorInt
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.andreypoltev.hotelbookingtestapp.util.Routes
 import com.andreypoltev.hotelbookingtestapp.composables.CustomBottomBar
+import com.andreypoltev.hotelbookingtestapp.composables.CustomCard
+import com.andreypoltev.hotelbookingtestapp.composables.CustomColumn
 import com.andreypoltev.hotelbookingtestapp.composables.CustomProgressIndicator
 import com.andreypoltev.hotelbookingtestapp.composables.RatingNameAddressHotel
+import com.andreypoltev.hotelbookingtestapp.util.Routes
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
@@ -74,7 +74,13 @@ fun HotelScreen(viewModel: HotelViewModel, navController: NavHostController) {
 
         Scaffold(
             topBar = {
-                CenterAlignedTopAppBar(title = { Text(text = "Отель") })
+                CenterAlignedTopAppBar(title = {
+                    Text(
+                        text = "Отель", fontSize = 18.sp,
+                        color = Color("#000000".toColorInt()),
+                        textAlign = TextAlign.Center
+                    )
+                })
             },
             bottomBar = {
                 CustomBottomBar(
@@ -97,19 +103,8 @@ fun HotelScreen(viewModel: HotelViewModel, navController: NavHostController) {
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
 
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(containerColor = Color.White)
-                ) {
-                    Column(
-                        modifier = Modifier.padding(
-                            start = 16.dp,
-                            end = 16.dp,
-                            top = 0.dp,
-                            bottom = 16.dp
-                        ),
-                        verticalArrangement = Arrangement.spacedBy(16.dp)
-                    ) {
+                CustomCard {
+                    CustomColumn {
 
                         Card {
                             HorizontalPager(state = pagerState) { page ->
