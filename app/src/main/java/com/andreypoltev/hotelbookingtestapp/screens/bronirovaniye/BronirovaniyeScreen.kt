@@ -39,6 +39,7 @@ import com.andreypoltev.hotelbookingtestapp.composables.CustomTextField
 import com.andreypoltev.hotelbookingtestapp.composables.CustomTopBar
 import com.andreypoltev.hotelbookingtestapp.composables.RatingNameAddress
 import com.andreypoltev.hotelbookingtestapp.util.Routes
+import com.andreypoltev.hotelbookingtestapp.util.formatAsCurrency
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -298,8 +299,7 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
                             Text(text = "Тур", color = Color("#828796".toColorInt()))
                             Spacer(modifier = Modifier.weight(1f))
                             Text(
-                                text = state.value.tourPrice.toString().reversed().chunked(3)
-                                    .joinToString(" ").reversed() + " ₽",
+                                text = formatAsCurrency(state.value.tourPrice.toString()),
                                 color = Color.Black,
                                 fontSize = 16.sp
                             )
@@ -310,8 +310,7 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
                             Text(text = "Топливный сбор", color = Color("#828796".toColorInt()))
                             Spacer(modifier = Modifier.weight(1f))
                             Text(
-                                text = state.value.fuelCharge.toString().reversed().chunked(3)
-                                    .joinToString(" ").reversed() + " ₽",
+                                text = formatAsCurrency(state.value.fuelCharge.toString()),
                                 color = Color.Black,
                                 fontSize = 16.sp
 
@@ -323,8 +322,7 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
                             Text(text = "Сервисный сбор", color = Color("#828796".toColorInt()))
                             Spacer(modifier = Modifier.weight(1f))
                             Text(
-                                text = state.value.serviceCharge.toString().reversed().chunked(3)
-                                    .joinToString(" ").reversed() + " ₽",
+                                text = formatAsCurrency(state.value.serviceCharge.toString()),
                                 color = Color.Black,
                                 fontSize = 16.sp
 
@@ -336,12 +334,13 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
                             Text(text = "К оплате", color = Color("#828796".toColorInt()))
                             Spacer(modifier = Modifier.weight(1f))
                             Text(
-                                text = (
-                                        (state.value.tourPrice
-                                            ?: 0) + (state.value.fuelCharge
-                                            ?: 0) + (state.value.serviceCharge
-                                            ?: 0)).toString().reversed().chunked(3)
-                                    .joinToString(" ").reversed() + " ₽",
+                                text = formatAsCurrency(
+                                    (
+                                            (state.value.tourPrice
+                                                ?: 0) + (state.value.fuelCharge
+                                                ?: 0) + (state.value.serviceCharge
+                                                ?: 0)).toString()
+                                ),
                                 color = Color.Black,
                                 fontSize = 16.sp
 

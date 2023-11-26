@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -39,6 +38,7 @@ import com.andreypoltev.hotelbookingtestapp.composables.CustomColumn
 import com.andreypoltev.hotelbookingtestapp.composables.CustomPeculiaritiesCard
 import com.andreypoltev.hotelbookingtestapp.composables.CustomTopBar
 import com.andreypoltev.hotelbookingtestapp.util.Routes
+import com.andreypoltev.hotelbookingtestapp.util.formatAsCurrency
 
 @OptIn(
     ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class,
@@ -141,10 +141,10 @@ fun NomerScreen(viewModel: NomerViewModel, navController: NavHostController, str
 
 
                         Text(
-                            text = it.price.toString() + " ₽",
+                            text = formatAsCurrency(it.price.toString()),
                             style = MaterialTheme.typography.headlineLarge,
                             fontWeight = FontWeight.Light
-                        ) // 000 000 000
+                        )
 
 
                         CustomButton(
