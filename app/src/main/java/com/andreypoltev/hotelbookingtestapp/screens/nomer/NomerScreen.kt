@@ -79,7 +79,7 @@ fun NomerScreen(viewModel: NomerViewModel, navController: NavHostController, str
 
 
                 CustomCard {
-                    CustomColumn(verticalArrangement = Arrangement.spacedBy(0.dp)) {
+                    CustomColumn {
                         CustomCard {
                             Box(Modifier.fillMaxSize()) {
 

@@ -153,29 +153,28 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
             // Информация о покупателе
             item {
                 CustomCard {
-                    Column(Modifier.padding(vertical = 12.dp, horizontal = 16.dp)) {
+                    CustomColumn(verticalArrangement = Arrangement.spacedBy(20.dp)) {
                         Text(
                             text = "Информация о покупателе", fontSize = 22.sp,
                             color = Color.Black
                         )
 
-                        Spacer(modifier = Modifier.size(20.dp))
+                        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            val phoneNumber = remember { mutableStateOf("") }
+                            CustomTextField(test = phoneNumber, title = "Номер телефона")
 
-                        val phoneNumber = remember { mutableStateOf("") }
-                        CustomTextField(test = phoneNumber, title = "Номер телефона")
 
-                        Spacer(modifier = Modifier.size(8.dp))
+                            val eMail = remember { mutableStateOf("") }
+                            CustomTextField(test = eMail, title = "Почта")
 
-                        val eMail = remember { mutableStateOf("") }
-                        CustomTextField(test = eMail, title = "Почта")
 
-                        Spacer(modifier = Modifier.size(8.dp))
+                            Text(
+                                fontSize = 14.sp,
+                                text = "Эти данные никому не передаются. После оплаты мы вышли чек на указанный вами номер и почту",
+                                color = Color("#828796".toColorInt())
+                            )
+                        }
 
-                        Text(
-                            fontSize = 14.sp,
-                            text = "Эти данные никому не передаются. После оплаты мы вышли чек на указанный вами номер и почту",
-                            color = Color("#828796".toColorInt())
-                        )
 
                     }
                 }
@@ -186,7 +185,7 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
             items(tourists.value) {
 
                 CustomCard {
-                    CustomColumn {
+                    CustomColumn(verticalArrangement = Arrangement.spacedBy(20.dp)) {
 
                         var isExpanded by remember {
                             mutableStateOf(false)
@@ -240,34 +239,40 @@ fun BronirovaniyeScreen(viewModel: BronirovaniyeViewModel, navController: NavHos
 
                         }
 
+
+
                         if (isExpanded) {
 
+                            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                val name = remember { mutableStateOf(it.name) }
+                                CustomTextField(test = name, title = "Имя")
 
-                            val name = remember { mutableStateOf(it.name) }
-                            CustomTextField(test = name, title = "Имя")
+                                val lastName = remember { mutableStateOf(it.lastName) }
+                                CustomTextField(test = lastName, title = "Фамилия")
 
-                            val lastName = remember { mutableStateOf(it.lastName) }
-                            CustomTextField(test = lastName, title = "Фамилия")
+                                val dateOfBirth =
+                                    remember { mutableStateOf(it.dateOfBirth.toString()) }
+                                CustomTextField(test = dateOfBirth, title = "Дата рождения")
 
-                            val dateOfBirth = remember { mutableStateOf(it.dateOfBirth.toString()) }
-                            CustomTextField(test = dateOfBirth, title = "Дата рождения")
+                                val citizenship = remember { mutableStateOf(it.citizenship) }
+                                CustomTextField(test = citizenship, title = "Номер телефона")
 
-                            val citizenship = remember { mutableStateOf(it.citizenship) }
-                            CustomTextField(test = citizenship, title = "Номер телефона")
+                                val foreignPassportNumber =
+                                    remember { mutableStateOf(it.foreignPassportNumber) }
+                                CustomTextField(
+                                    test = foreignPassportNumber,
+                                    title = "Номер загранпаспорта"
+                                )
 
-                            val foreignPassportNumber =
-                                remember { mutableStateOf(it.foreignPassportNumber) }
-                            CustomTextField(
-                                test = foreignPassportNumber,
-                                title = "Номер загранпаспорта"
-                            )
+                                val foreignPassportExpirationDate =
+                                    remember { mutableStateOf(it.foreignPassportExpirationDate.toString()) }
+                                CustomTextField(
+                                    test = foreignPassportExpirationDate,
+                                    title = "Срок действия загранпаспорта"
+                                )
+                            }
 
-                            val foreignPassportExpirationDate =
-                                remember { mutableStateOf(it.foreignPassportExpirationDate.toString()) }
-                            CustomTextField(
-                                test = foreignPassportExpirationDate,
-                                title = "Срок действия загранпаспорта"
-                            )
+
                         }
 
                     }

@@ -179,6 +179,8 @@ fun HotelScreen(viewModel: HotelViewModel, navController: NavHostController) {
 
 
                         }
+                        
+                        Spacer(modifier = Modifier.size(16.dp))
 
                         RatingNameAddress(
                             name = state.value.name.toString(),
@@ -186,6 +188,9 @@ fun HotelScreen(viewModel: HotelViewModel, navController: NavHostController) {
                             rating = state.value.rating.toString(),
                             ratingName = state.value.ratingName.toString()
                         )
+
+                        Spacer(modifier = Modifier.size(16.dp))
+
 
 //                        RatingNameAddressHotel(state)
 
@@ -218,6 +223,9 @@ fun HotelScreen(viewModel: HotelViewModel, navController: NavHostController) {
 
                         Text(text = "Об отеле", style = MaterialTheme.typography.headlineMedium)
 
+                        Spacer(modifier = Modifier.size(16.dp))
+
+
                         FlowRow(
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                             verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -229,41 +237,12 @@ fun HotelScreen(viewModel: HotelViewModel, navController: NavHostController) {
 
                         }
 
-//                        LazyVerticalGrid(
-//
-//                            modifier = Modifier
-//                                .heightIn(max = 100.dp),
-//                            columns = GridCells.Adaptive(minSize = 128.dp)
-//                        ) {
-//                            state.value.aboutTheHotel?.peculiarities?.forEach {
-//                                item {
-//                                    CustomPeculiaritiesCard(it.toString())
-//                                }
-//                            }
-//
-//                        }
-
-
-//                        LazyHorizontalStaggeredGrid(
-//                            modifier = Modifier
-//                                .fillMaxWidth()
-//                                .heightIn(max = 80.dp),
-//                            verticalArrangement = Arrangement.spacedBy(8.dp),
-//                            horizontalItemSpacing = 8.dp,
-//                            rows = StaggeredGridCells.Adaptive(200.dp),
-//                            content = {
-//
-//                                state.value.aboutTheHotel?.peculiarities?.forEach {
-//                                    item {
-//                                        CustomPeculiaritiesCard(it.toString())
-//                                    }
-//                                }
-//
-//
-//                            }
-//                        )
+                        Spacer(modifier = Modifier.size(12.dp))
 
                         Text(text = state.value.aboutTheHotel?.description.toString())
+
+                        Spacer(modifier = Modifier.size(16.dp))
+
 
                         Card(
                             modifier = Modifier.fillMaxWidth(),
