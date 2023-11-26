@@ -20,11 +20,15 @@ class HotelViewModel : ViewModel() {
     private val _flowOfHotelResponseModel = MutableStateFlow(HotelResponseModel())
     val state = _flowOfHotelResponseModel.asStateFlow()
 
+    private val _isLoading = MutableStateFlow(true)
+    val isLoading = _isLoading.asStateFlow()
+
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
             _flowOfHotelResponseModel.value = getResponse()
-            getResponse()
+
+            _isLoading.value = false
 
         }
 
